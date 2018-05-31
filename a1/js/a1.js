@@ -98,7 +98,7 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
         var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff));
         var hues = ["royalblue","forestgreen","firebrick"];
         var color = d3.hcl(hues[i]);
-        color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal));
+        color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
         return color;
       })
     .object(json);
