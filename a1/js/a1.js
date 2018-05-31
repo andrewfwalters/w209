@@ -76,10 +76,10 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
     .domain([0,Math.abs(1-carbGoal)])
     .range([0, 255]);
   var green = d3.scaleLinear()
-    .domain([0,Math.abs(1-fatGoal))])
+    .domain([0,Math.abs(1-fatGoal)])
     .range([0, 255]);
   var blue = d3.scaleLinear()
-    .domain([0,Math.abs(1-proteinGoal))])
+    .domain([0,Math.abs(1-proteinGoal)])
     .range([0, 255]);
   /*var lum = d3.scaleLinear()
     .domain([0,calorieGoal])
