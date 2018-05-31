@@ -91,9 +91,9 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
       .key(function(d) { return d.date; })
       .rollup(function(d) {
         var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-        var carbDiff = Math.max(0,carbGoal-(d[0].carbs*calsPerCarb/calTotal))
-        var fatDiff = Math.max(0,fatGoal-(d[0].fat*calsPerFat/calTotal))
-        var proteinDiff = Math.max(0,proteinGoal-(d[0].protein*calsPerProtein/calTotal))
+        var carbDiff = Math.max(0,(d[0].carbs*calsPerCarb/calTotal)-carbGoal)
+        var fatDiff = Math.max(0,(d[0].fat*calsPerFat/calTotal)-fatGoal)
+        var proteinDiff = Math.max(0,(d[0].protein*calsPerProtein/calTotal)-proteinGoal)
         var diffs = [carbDiff,fatDiff,proteinDiff];
         var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff));
         var hues = ["royalblue","forestgreen","firebrick"];
