@@ -32,7 +32,7 @@ weekDays = ['S','M','T','W','T','F','S']
     .attr("dy", "-.25em")
     .text(function(d) { return week_days[i]; });*/
 
-daysOfWeek = svg.append("rect")
+var daysOfWeek = svg.append("g")
     .attr("width", cellSize)
     .attr("height", cellSize*7)
     .attr("x", -cellSize)
@@ -43,8 +43,9 @@ daysOfWeek.data(weekDays)
     .enter()
     .append("text")
     //.attr("transform", "translate(0," + cellSize * (i+1) + ")")
-    .style("text-anchor", "end")
-    .attr("dy", "-.25em")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 10)
+    .attr("text-anchor", "middle")
     .text(d => d);
 
 var rect = svg.append("g")
