@@ -40,14 +40,14 @@ var daysOfWeek = selectAll("svg")
     .attr("y", 0)
     .attr("fill", "black");
 
-daysOfWeek.data(weekDays)
+/*daysOfWeek.data(weekDays)
     .enter()
     .append("text")
     //.attr("transform", "translate(0," + cellSize * (i+1) + ")")
     .attr("font-family", "sans-serif")
     .attr("font-size", 10)
     .attr("text-anchor", "middle")
-    .text(d => d);
+    .text(d => d);*/
 
 var rect = svg.append("g")
     .attr("fill", "none")
