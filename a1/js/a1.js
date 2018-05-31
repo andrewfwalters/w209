@@ -92,7 +92,7 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
         var carbDiff = Math.abs(carbGoal-(d.carbs*calsPerCarb/calTotal))
         var fatDiff = Math.abs(fatGoal-(d.fat*calsPerFat/calTotal))
         var proteinDiff = Math.abs(proteinGoal-(d.protein*calsPerProtein/calTotal))
-        return d3.color(red(carbDiff),green(fatDiff),blue(proteinDiff));
+        return d3.color.rgb(red(carbDiff),green(fatDiff),blue(proteinDiff));
       })
     .object(json);
 
