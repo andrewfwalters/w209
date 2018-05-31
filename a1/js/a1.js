@@ -24,13 +24,20 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d; });
 
-week_days = ['S','M','T','W','T','F','S']
+/*week_days = ['S','M','T','W','T','F','S']
 
 svg.append("text")
     .attr("transform", "translate(-5," + cellSize* (i+1) + ")")
     .style("text-anchor", "end")
     .attr("dy", "-.25em")
-    .text(function(d) { return week_days[i]; });
+    .text(function(d) { return week_days[i]; });*/
+
+svg.append("rect")
+    .attr("width", cellSize)
+    .attr("height", cellSize*7)
+    .attr("x", -6)
+    .attr("y", 0)
+    .attr("fill", "black");
 
 var rect = svg.append("g")
     .attr("fill", "none")
