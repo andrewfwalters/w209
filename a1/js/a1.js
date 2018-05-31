@@ -9,7 +9,7 @@ var calorieGoal = 2000,
 
 var calsPerCarb = 4,
     calsPerFat = 9,
-    calsPerProtein = 4,
+    calsPerProtein = 4;
 
 var formatPercent = d3.format(".1%");
 
