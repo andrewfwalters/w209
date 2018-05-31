@@ -96,7 +96,7 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
         var fatDiff = Math.max(0,fatGoal-(d[0].fat*calsPerFat/calTotal))
         var proteinDiff = Math.max(0,proteinGoal-(d[0].protein*calsPerProtein/calTotal))
         var diffs = [carbDiff,fatDiff,proteinDiff];
-        var i = diffs.indexOf(Math.max(diffs));
+        var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff));
         hue = hues[i];
         console.log("difs:" + diffs + " max:" + Math.max(diffs) + " i:" + i + " hue:" + hue);
         color = d3.hcl(hue,50,lum(Math.abs(calTotal-calorieGoal)))
