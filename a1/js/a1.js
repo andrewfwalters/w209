@@ -24,6 +24,14 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d; });
 
+week_days = ['S','M','T','W','T','F','S']
+
+svg.append("text")
+    .attr("transform", "translate(-5," + cellSize* (i+1) + ")")
+    .style("text-anchor", "end")
+    .attr("dy", "-.25em")
+    .text(function(d) { return week_days[i]; });
+
 var rect = svg.append("g")
     .attr("fill", "none")
     .attr("stroke", "#ccc")
