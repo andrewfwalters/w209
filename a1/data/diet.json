@@ -1,19 +1,19 @@
 [ {
     "date": "2018-05-31",
-    "carbs": 206,
-    "fat": 67,
-    "protein": 146
+    "carbs": 220,
+    "fat": 75,
+    "protein": 130
   },
   {
     "date": "2018-05-30",
-    "carbs": 206,
+    "carbs": 245,
     "fat": 67,
-    "protein": 146
+    "protein": 140
   },
   {
     "date": "2018-05-29",
     "carbs": 206,
-    "fat": 67,
+    "fat": 72,
     "protein": 146
   },
   {
@@ -24,21 +24,21 @@
   },
   {
     "date": "2018-05-27",
-    "carbs": 206,
-    "fat": 67,
-    "protein": 146
+    "carbs": 180,
+    "fat": 62,
+    "protein": 155
   },
   {
     "date": "2018-05-26",
-    "carbs": 206,
-    "fat": 67,
-    "protein": 146
+    "carbs": 180,
+    "fat": 55,
+    "protein": 160
   },
   {
     "date": "2018-05-25",
-    "carbs": 206,
+    "carbs": 215,
     "fat": 67,
-    "protein": 146
+    "protein": 140
   },
   {
     "date": "2018-05-24",
