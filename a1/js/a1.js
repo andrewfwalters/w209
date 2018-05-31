@@ -37,7 +37,14 @@ svg.append("rect")
     .attr("height", cellSize*7)
     .attr("x", -cellSize)
     .attr("y", 0)
-    .attr("fill", "black");
+    .attr("fill", "black")
+    .data(weekDays)
+    .enter()
+    .append("text")
+    .attr("transform", "translate(-5," + cellSize* (i+1) + ")")
+    .style("text-anchor", "end")
+    .attr("dy", "-.25em")
+    .text(d => d);
 
 var rect = svg.append("g")
     .attr("fill", "none")
