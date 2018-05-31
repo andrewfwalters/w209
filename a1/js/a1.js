@@ -19,7 +19,7 @@ var color = d3.scaleQuantize()
 
 var svg = d3.select("body")
   .selectAll("svg")
-  .data(d3.range(2017, 2019))
+  .data(d3.range(2018, 2019))
   .enter().append("svg")
     .attr("width", width)
     .attr("height", height)
