@@ -24,32 +24,21 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d; });
 
-weekDays = ['S','M','T','W','T','F','S']
+    weekDays = ['S','M','T','W','T','F','S']
 
-/*svg.append("text")
-    .attr("transform", "translate(-5," + cellSize* (i+1) + ")")
-    .style("text-anchor", "end")
-    .attr("dy", "-.25em")
-    .text(function(d) { return week_days[i]; });*/
+    var daysOfWeek = svg//selectAll("svg")
+        .append("g")
+        .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
 
-var daysOfWeek = svg//selectAll("svg")
-    .append("g")
-    .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
-    /*.attr("width", cellSize)
-    .attr("height", cellSize*7)
-    .attr("x", -cellSize)
-    .attr("y", 0)
-    .attr("fill", "black");*/
-
-daysOfWeek.data(weekDays)
-    .enter()
-    .append("rect")
-    //.attr("transform", "translate(0," + cellSize * (i+1) + ")")
-    .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
-    .attr("text-anchor", "middle")
-    .attr("fill", "grey")
-    .text(d => d);
+    daysOfWeek.selectAll("text")
+        .data(weekDays)
+        .enter()
+        .append("text")
+        .attr("transform", (d,i) => "translate(6," + (cellSize * i + 12) + ")")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .attr("text-anchor", "middle")
+        .text(d => d);
 
 var rect = svg.append("g")
     .attr("fill", "none")
