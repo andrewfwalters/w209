@@ -81,9 +81,9 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
   var blue = d3.scaleLinear()
     .domain([0,Math.abs(1-proteinGoal)])
     .range([0, 255]);
-  /*var lum = d3.scaleLinear()
+  var lum = d3.scaleLinear()
     .domain([0,calorieGoal])
-    .range([0, 30]);*/
+    .range([0, 30]);
 
   var fillColor = d3.nest()
       .key(function(d) { return d.date; })
@@ -94,7 +94,10 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
         var proteinDiff = Math.max(0,proteinGoal-(d[0].protein*calsPerProtein/calTotal))
         console.log("d:" + JSON.stringify(d));
         console.log("calTotal:" + calTotal + " carbDiff:" + carbDiff + " fatDiff:" + fatDiff + " proteinDiff:" + proteinDiff);
-        return d3.rgb(red(carbDiff),green(fatDiff),blue(proteinDiff));
+        hue = d3.rgb(red(carbDiff),green(fatDiff),blue(proteinDiff))
+        color = d3.hcl(hue)
+        color.l = lum(Math.abs(calTotal-calorieGoal));
+        return color;
       })
     .object(json);
 
@@ -108,9 +111,6 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
 
   rect.filter(function(d) { return d in fillColor; })
       .attr("fill", d => fillColor[d]);
-      /*
-    .append("title")
-      .text(function(d) { return d + ": " + formatPercent(data[d]); });*/
 });
 
 function pathMonth(t0) {
