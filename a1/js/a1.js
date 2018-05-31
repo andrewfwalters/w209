@@ -72,6 +72,7 @@ svg.append("g")
 d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
   if (error) throw error;
 
+  /*
   var red = d3.scaleLinear()
     .domain([0,Math.abs(1-carbGoal)])
     .range([0, 255]);
@@ -81,6 +82,7 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
   var blue = d3.scaleLinear()
     .domain([0,Math.abs(1-proteinGoal)])
     .range([0, 255]);
+  */
   var lum = d3.scaleLinear()
     .domain([0,calorieGoal])
     .range([98, 40]);
@@ -96,19 +98,11 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
         var diffs = [carbDiff,fatDiff,proteinDiff];
         var i = diffs.indexOf(Math.max(diffs));
         hue = hues[i];
-        console.log("i:" + i + " hue:" + hue);
+        console.log("difs:" + diffs + " max:" + Math.max(diffs) + " i:" + i + " hue:" + hue);
         color = d3.hcl(hue,50,lum(Math.abs(calTotal-calorieGoal)))
         return color;
       })
     .object(json);
-
-  /*var fillSaturation = d3.nest()
-      .key(function(d) { return d.date; })
-      .rollup(function(d) {
-
-        return ;
-      })
-    .object(json);*/
 
   rect.filter(function(d) { return d in fillColor; })
       .attr("fill", d => fillColor[d]);
