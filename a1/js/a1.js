@@ -1,5 +1,5 @@
 var width = 960,
-    height = 136,
+    height = 146,
     cellSize = 17;
 
 var formatPercent = d3.format(".1%");
@@ -24,9 +24,9 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d; });
 
-/*week_days = ['S','M','T','W','T','F','S']
+weekDays = ['S','M','T','W','T','F','S']
 
-svg.append("text")
+/*svg.append("text")
     .attr("transform", "translate(-5," + cellSize* (i+1) + ")")
     .style("text-anchor", "end")
     .attr("dy", "-.25em")
@@ -35,7 +35,7 @@ svg.append("text")
 svg.append("rect")
     .attr("width", cellSize)
     .attr("height", cellSize*7)
-    .attr("x", -6)
+    .attr("x", -cellSize)
     .attr("y", 0)
     .attr("fill", "black");
 
