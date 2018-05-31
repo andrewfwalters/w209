@@ -33,12 +33,13 @@ weekDays = ['S','M','T','W','T','F','S']
     .text(function(d) { return week_days[i]; });*/
 
 var daysOfWeek = svg//selectAll("svg")
-    .append("rect")
-    .attr("width", cellSize)
+    .append("g")
+    .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
+    /*.attr("width", cellSize)
     .attr("height", cellSize*7)
     .attr("x", -cellSize)
     .attr("y", 0)
-    .attr("fill", "black");
+    .attr("fill", "black");*/
 
 /*daysOfWeek.data(weekDays)
     .enter()
