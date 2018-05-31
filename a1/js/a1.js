@@ -32,7 +32,7 @@ weekDays = ['S','M','T','W','T','F','S']
     .attr("dy", "-.25em")
     .text(function(d) { return week_days[i]; });*/
 
-var daysOfWeek = selectAll("svg")
+var daysOfWeek = svg//selectAll("svg")
     .append("rect")
     .attr("width", cellSize)
     .attr("height", cellSize*7)
