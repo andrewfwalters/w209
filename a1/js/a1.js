@@ -85,7 +85,7 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
   */
   var lum = d3.scaleLinear()
     .domain([0,calorieGoal/2])
-    .range([98, 40]);
+    .range([100, 55]);
 
   var fillColor = d3.nest()
       .key(function(d) { return d.date; })
