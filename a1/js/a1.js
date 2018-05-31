@@ -7,6 +7,10 @@ var calorieGoal = 2000,
     fatGoal = 0.30,
     proteinGoal = 0.30;
 
+var calsPerCarb = 4,
+    calsPerFat = 9,
+    calsPerProtein = 4,
+
 var formatPercent = d3.format(".1%");
 
 var color = d3.scaleQuantize()
@@ -84,7 +88,11 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
   var fillColor = d3.nest()
       .key(function(d) { return d.date; })
       .rollup(function(d) {
-        return d3.color(red(Math.abs(carbGoal-d.carbs)),green(Math.abs(carbGoal-d.fat)),blue(Math.abs(carbGoal-d.protein)));
+        var calTotal = d.carbs*calsPerCarb + d.fat*calsPerFat + d.protein*calsPerProtein;
+        var carbDiff = Math.abs(carbGoal-(d.carbs*calsPerCarb/calTotal))
+        var fatDiff = Math.abs(fatGoal-(d.fat*calsPerFat/calTotal))
+        var proteinDiff = Math.abs(proteinGoal-(d.protein*calsPerProtein/calTotal))
+        return d3.color(red(carbDiff),green(fatDiff),blue(proteinDiff);
       })
     .object(json);
 
