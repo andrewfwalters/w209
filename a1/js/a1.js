@@ -88,10 +88,10 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
   var fillColor = d3.nest()
       .key(function(d) { return d.date; })
       .rollup(function(d) {
-        var calTotal = d.carbs*calsPerCarb + d.fat*calsPerFat + d.protein*calsPerProtein;
-        var carbDiff = Math.abs(carbGoal-(d.carbs*calsPerCarb/calTotal))
-        var fatDiff = Math.abs(fatGoal-(d.fat*calsPerFat/calTotal))
-        var proteinDiff = Math.abs(proteinGoal-(d.protein*calsPerProtein/calTotal))
+        var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
+        var carbDiff = Math.abs(carbGoal-(d[0].carbs*calsPerCarb/calTotal))
+        var fatDiff = Math.abs(fatGoal-(d[0].fat*calsPerFat/calTotal))
+        var proteinDiff = Math.abs(proteinGoal-(d[0].protein*calsPerProtein/calTotal))
         console.log("d:" + JSON.stringify(d));
         console.log("carb:" + d.carbs + " fat:" + d.fat + " protein:" + d.protein);
         console.log("calTotal:" + calTotal + " carbDiff:" + carbDiff + " fatDiff:" + fatDiff + " proteinDiff:" + proteinDiff);
