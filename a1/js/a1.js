@@ -73,13 +73,13 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
   if (error) throw error;
 
   var red = d3.scaleLinear()
-    .domain([0,Math.max(Math.abs(1-carbGoal),Math.abs(0-carbGoal))])
+    .domain([0,Math.abs(1-carbGoal)])
     .range([0, 255]);
   var green = d3.scaleLinear()
-    .domain([0,Math.max(Math.abs(1-fatGoal),Math.abs(0-fatGoal))])
+    .domain([0,Math.abs(1-fatGoal))])
     .range([0, 255]);
   var blue = d3.scaleLinear()
-    .domain([0,Math.max(Math.abs(1-proteinGoal),Math.abs(0-proteinGoal))])
+    .domain([0,Math.abs(1-proteinGoal))])
     .range([0, 255]);
   /*var lum = d3.scaleLinear()
     .domain([0,calorieGoal])
@@ -89,11 +89,10 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
       .key(function(d) { return d.date; })
       .rollup(function(d) {
         var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-        var carbDiff = Math.abs(carbGoal-(d[0].carbs*calsPerCarb/calTotal))
-        var fatDiff = Math.abs(fatGoal-(d[0].fat*calsPerFat/calTotal))
-        var proteinDiff = Math.abs(proteinGoal-(d[0].protein*calsPerProtein/calTotal))
+        var carbDiff = Math.max(0,carbGoal-(d[0].carbs*calsPerCarb/calTotal))
+        var fatDiff = Math.max(0,fatGoal-(d[0].fat*calsPerFat/calTotal))
+        var proteinDiff = Math.max(0,proteinGoal-(d[0].protein*calsPerProtein/calTotal))
         console.log("d:" + JSON.stringify(d));
-        console.log("carb:" + d.carbs + " fat:" + d.fat + " protein:" + d.protein);
         console.log("calTotal:" + calTotal + " carbDiff:" + carbDiff + " fatDiff:" + fatDiff + " proteinDiff:" + proteinDiff);
         return d3.rgb(red(carbDiff),green(fatDiff),blue(proteinDiff));
       })
