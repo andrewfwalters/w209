@@ -105,7 +105,7 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
     .object(json);*/
 
   rect.filter(function(d) { return d in fillColor; })
-      .attr("fill", d => d);
+      .attr("fill", d => fillColor[d]);
       /*
     .append("title")
       .text(function(d) { return d + ": " + formatPercent(data[d]); });*/
