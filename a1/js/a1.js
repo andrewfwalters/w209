@@ -10,7 +10,7 @@ var color = d3.scaleQuantize()
 
 var svg = d3.select("body")
   .selectAll("svg")
-  .data(d3.range(2018, 2019))
+  .data(d3.range(2017, 2019))
   .enter().append("svg")
     .attr("width", width)
     .attr("height", height)
@@ -18,7 +18,7 @@ var svg = d3.select("body")
     .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
 svg.append("text")
-    .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
+    .attr("transform", "translate(" + cellSize * 26 + ",-6)")
     .attr("font-family", "sans-serif")
     .attr("font-size", 10)
     .attr("text-anchor", "middle")
