@@ -60,13 +60,13 @@ svg.append("g")
   .enter().append("path")
     .attr("d", pathMonth);
 
-d3.csv("dji.csv", function(error, csv) {
+d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
   if (error) throw error;
 
   var data = d3.nest()
-      .key(function(d) { return d.Date; })
+      .key(function(d) { return d.date; })
       .rollup(function(d) { return (d[0].Close - d[0].Open) / d[0].Open; })
-    .object(csv);
+    .object(json);
 
   rect.filter(function(d) { return d in data; })
       .attr("fill", function(d) { return color(data[d]); })
