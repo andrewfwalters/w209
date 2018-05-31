@@ -2,6 +2,11 @@ var width = 960,
     height = 146,
     cellSize = 17;
 
+var calorieGoal = 2000,
+    carbGoal = 0.40,
+    fatGoal = 0.30,
+    proteinGoal = 0.30;
+
 var formatPercent = d3.format(".1%");
 
 var color = d3.scaleQuantize()
@@ -63,15 +68,39 @@ svg.append("g")
 d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
   if (error) throw error;
 
-  var data = d3.nest()
+  var red = d3.scaleLinear()
+    .domain([0,Math.max(Math.abs(1-carbGoal),Math.abs(0-carbGoal))])
+    .range([0, 255]);
+  var green = d3.scaleLinear()
+    .domain([0,Math.max(Math.abs(1-fatGoal),Math.abs(0-fatGoal))])
+    .range([0, 255]);
+  var blue = d3.scaleLinear()
+    .domain([0,Math.max(Math.abs(1-proteinGoal),Math.abs(0-proteinGoal))])
+    .range([0, 255]);
+  /*var lum = d3.scaleLinear()
+    .domain([0,calorieGoal])
+    .range([0, 30]);*/
+
+  var fillColor = d3.nest()
       .key(function(d) { return d.date; })
-      .rollup(function(d) { return (d[0].Close - d[0].Open) / d[0].Open; })
+      .rollup(function(d) {
+        return d3.color(red(Math.abs(carbGoal-d.carbs)),green(Math.abs(carbGoal-d.fat)),blue(Math.abs(carbGoal-d.protein)));
+      })
     .object(json);
 
-  rect.filter(function(d) { return d in data; })
-      .attr("fill", function(d) { return color(data[d]); })
+  /*var fillSaturation = d3.nest()
+      .key(function(d) { return d.date; })
+      .rollup(function(d) {
+
+        return ;
+      })
+    .object(json);*/
+
+  rect.filter(function(d) { return d in fillColor; })
+      .attr("fill", d => d);
+      /*
     .append("title")
-      .text(function(d) { return d + ": " + formatPercent(data[d]); });
+      .text(function(d) { return d + ": " + formatPercent(data[d]); });*/
 });
 
 function pathMonth(t0) {
