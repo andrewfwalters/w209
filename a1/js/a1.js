@@ -96,7 +96,7 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
         var diffs = [carbDiff,fatDiff,proteinDiff];
         var i = diffs.indexOf(Math.max(diffs));
         hue = hues[i];
-        console.log(hue);
+        console.log("i:" + i + " hue:" + hue);
         color = d3.hcl(hue,50,lum(Math.abs(calTotal-calorieGoal)))
         return color;
       })
