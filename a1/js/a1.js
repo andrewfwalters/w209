@@ -33,21 +33,21 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d; });
 
-    weekDays = ['S','M','T','W','T','F','S']
+weekDays = ['S','M','T','W','T','F','S']
 
-    var daysOfWeek = svg//selectAll("svg")
-        .append("g")
-        .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
+var daysOfWeek = svg//selectAll("svg")
+    .append("g")
+    .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
 
-    daysOfWeek.selectAll("text")
-        .data(weekDays)
-        .enter()
-        .append("text")
-        .attr("transform", (d,i) => "translate(6," + (cellSize * i + 12) + ")")
-        .attr("font-family", "sans-serif")
-        .attr("font-size", 10)
-        .attr("text-anchor", "middle")
-        .text(d => d);
+daysOfWeek.selectAll("text")
+    .data(weekDays)
+    .enter()
+    .append("text")
+    .attr("transform", (d,i) => "translate(6," + (cellSize * i + 12) + ")")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 10)
+    .attr("text-anchor", "middle")
+    .text(d => d);
 
 var rect = svg.append("g")
     .attr("fill", "none")
