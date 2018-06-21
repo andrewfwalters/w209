@@ -68,21 +68,11 @@ svg.append("g")
 d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
   if (error) throw error;
 
-  /*
-  var red = d3.scaleLinear()
-    .domain([0,Math.abs(1-carbGoal)])
-    .range([0, 255]);
-  var green = d3.scaleLinear()
-    .domain([0,Math.abs(1-fatGoal)])
-    .range([0, 255]);
-  var blue = d3.scaleLinear()
-    .domain([0,Math.abs(1-proteinGoal)])
-    .range([0, 255]);
-  */
   var lum = d3.scaleLinear()
     .domain([0,calorieGoal/2])
     .range([100, 55]);
 
+  var hues = ["royalblue","forestgreen","firebrick","gray"];
   var fillColor = d3.nest()
       .key(function(d) { return d.date; })
       .rollup(function(d) {
@@ -92,13 +82,13 @@ d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", 
         var proteinDiff = Math.max(0,(d[0].protein*calsPerProtein/calTotal)-proteinGoal)
         var diffs = [carbDiff,fatDiff,proteinDiff,0.04];
         var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,0.04));
-        var hues = ["royalblue","forestgreen","firebrick","gray"];
         var color = d3.hcl(hues[i]);
         color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
         return color;
       })
     .object(json);
 
+  //todo change fill color to append circle with fill color and size
   rect.filter(function(d) { return d in fillColor; })
       .attr("fill", d => fillColor[d]);
 });
