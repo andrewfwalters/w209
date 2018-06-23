@@ -43,8 +43,11 @@ var MacroPlotLib = function() {
   }
   */
 
+  var svg; //array of svgs for each calendar year
+  var rect; //
+
   var drawCalendar = function() {
-    var svg = d3.select("body")
+    svg = d3.select("body")
       .selectAll("svg")
       .data(d3.range(2017, 2019))
       .enter().append("svg")
@@ -76,7 +79,7 @@ var MacroPlotLib = function() {
         .attr("text-anchor", "middle")
         .text(d => d);
 
-    var rect = svg.append("g")
+    rect = svg.append("g")
         .attr("fill", "none")
         .attr("stroke", "#ccc")
       .selectAll("rect")
