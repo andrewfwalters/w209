@@ -24,9 +24,9 @@ var calsPerCarb = 4,
     calsPerProtein = 4;
 var formatPercent = d3.format(".1%");
 
-var MacroPlotLib = MacroPlotLib || {};
+//var MacroPlotLib = MacroPlotLib || {};
 
-var MacroPlotLib.makePlot = function() {
+var MacroPlotLib = function() {
 
   /*
   var goals = {
@@ -43,7 +43,7 @@ var MacroPlotLib.makePlot = function() {
   }
   */
 
-  var drawCalendar_ = function() {
+  var drawCalendar = function() {
     var svg = d3.select("body")
       .selectAll("svg")
       .data(d3.range(2017, 2019))
@@ -108,7 +108,7 @@ var MacroPlotLib.makePlot = function() {
     }
   }
 
-  var drawPoints_ = function() {
+  var drawPoints = function() {
     d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
       if (error) throw error;
 
@@ -140,10 +140,10 @@ var MacroPlotLib.makePlot = function() {
   }
 
   return {
-    "drawCalendar": drawCalendar_,
-    "drawPoints": drawPoints_
+    "drawCalendar": drawCalendar,
+    "drawPoints": drawPoints
   }
-}
+}();
 
-var andrewMarcos = MacroPlotLib.makePlot();
+var andrewMarcos = MacroPlotLib();
 andrewMarcos.drawCalendar();
