@@ -143,7 +143,7 @@ var MacroPlotLib = function() {
     "drawCalendar": drawCalendar,
     "drawPoints": drawPoints
   };
-}();
+};
 
 var andrewMarcos = MacroPlotLib();
 andrewMarcos.drawCalendar();
