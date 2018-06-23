@@ -147,3 +147,4 @@ var MacroPlotLib = function() {
 
 var andrewMarcos = MacroPlotLib();
 andrewMarcos.drawCalendar();
+andrewMarcos.drawPoints();
