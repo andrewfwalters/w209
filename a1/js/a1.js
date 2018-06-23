@@ -138,8 +138,8 @@ var MacroPlotLib = function() {
       //todo change fill color to append circle with fill color and size
       rect.filter(function(d) { return d in fillColor; })
           .append("circle")
-          .attr("cx",10)
-          .attr("cy",10)
+          //.attr("cx",10)
+          //.attr("cy",10)
           .attr("r",5)
           .attr("fill","firebrick");
           //.attr("fill", d => fillColor[d]);
