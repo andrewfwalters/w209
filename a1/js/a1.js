@@ -106,7 +106,7 @@ var MacroPlotLib = function() {
           + "H" + (w1 + 1) * cellSize + "V" + 0
           + "H" + (w0 + 1) * cellSize + "Z";
     }
-  }
+  };
 
   var drawPoints = function() {
     d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
@@ -137,7 +137,7 @@ var MacroPlotLib = function() {
       rect.filter(function(d) { return d in fillColor; })
           .attr("fill", d => fillColor[d]);
     });
-  }
+  };
 
   return {
     "drawCalendar": drawCalendar,
