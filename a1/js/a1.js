@@ -43,8 +43,9 @@ var MacroPlotLib = function() {
   }
   */
 
+  // module private vars
   var svg; //array of svgs for each calendar year
-  var rect; //
+  var rect; //array of rects for each day in each element of svg
 
   var drawCalendar = function() {
     svg = d3.select("body")
@@ -65,11 +66,9 @@ var MacroPlotLib = function() {
 
     weekDays = ['S','M','T','W','T','F','S']
 
-    var daysOfWeek = svg
-        .append("g")
-        .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
-
-    daysOfWeek.selectAll("text")
+    svg.append("g")
+        .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")")
+        .selectAll("text")
         .data(weekDays)
         .enter()
         .append("text")
@@ -84,7 +83,8 @@ var MacroPlotLib = function() {
         .attr("stroke", "#ccc")
       .selectAll("rect")
       .data(function(d) { return d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
-      .enter().append("rect")
+      .enter()
+      .append("rect")
         .attr("width", cellSize)
         .attr("height", cellSize)
         .attr("x", function(d) { return d3.timeWeek.count(d3.timeYear(d), d) * cellSize; })
