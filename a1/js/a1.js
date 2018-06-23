@@ -1,105 +1,149 @@
+/** W209 - Assignment 1B
+  * Andrew Walters (andrewfwalters@berkeley.edu)
+  * June 21, 2018
+**/
+
+//todo refactor to module pattern
+//todo add a slider
+//todo add slider action
+//todo include text
+//todo add an on hover fade
+//todo write prose and takeaways
+//todo scale svg
+
+// Global Constants
 var width = 960,
     height = 146,
     cellSize = 17;
-
 var calorieGoal = 2000,
     carbGoal = 0.40,
     fatGoal = 0.30,
     proteinGoal = 0.30;
-
 var calsPerCarb = 4,
     calsPerFat = 9,
     calsPerProtein = 4;
-
 var formatPercent = d3.format(".1%");
 
-var svg = d3.select("body")
-  .selectAll("svg")
-  .data(d3.range(2018, 2019))
-  .enter().append("svg")
-    .attr("width", width)
-    .attr("height", height)
-  .append("g")
-    .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+var MacroPlotLib = MacroPlotLib || {};
 
-svg.append("text")
-    .attr("transform", "translate(" + cellSize * 26 + ",-6)")
-    .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
-    .attr("text-anchor", "middle")
-    .text(function(d) { return d; });
+var MacroPlotLib.makePlot = function() {
 
-weekDays = ['S','M','T','W','T','F','S']
+  /*
+  var goals = {
+    "carb_d": ,
+    "fat_d": ,
+    "protein_d": ,
+    "calorie_c": 2000
+  }
 
-var daysOfWeek = svg//selectAll("svg")
-    .append("g")
-    .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
+  var calculateGoals = function() {
+    "carb_g": ,
+    "fat_g": ,
+    "protein_g": ,
+  }
+  */
 
-daysOfWeek.selectAll("text")
-    .data(weekDays)
-    .enter()
-    .append("text")
-    .attr("transform", (d,i) => "translate(6," + (cellSize * i + 12) + ")")
-    .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
-    .attr("text-anchor", "middle")
-    .text(d => d);
+  var drawCalendar_ = function() {
+    var svg = d3.select("body")
+      .selectAll("svg")
+      .data(d3.range(2017, 2019))
+      .enter().append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
-var rect = svg.append("g")
-    .attr("fill", "none")
-    .attr("stroke", "#ccc")
-  .selectAll("rect")
-  .data(function(d) { return d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
-  .enter().append("rect")
-    .attr("width", cellSize)
-    .attr("height", cellSize)
-    .attr("x", function(d) { return d3.timeWeek.count(d3.timeYear(d), d) * cellSize; })
-    .attr("y", function(d) { return d.getDay() * cellSize; })
-    .datum(d3.timeFormat("%Y-%m-%d"));
+    svg.append("text")
+        .attr("transform", "translate(" + cellSize * 26 + ",-6)")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .attr("text-anchor", "middle")
+        .text(d => d);
 
-svg.append("g")
-    .attr("fill", "none")
-    .attr("stroke", "#000")
-  .selectAll("path")
-  .data(function(d) { return d3.timeMonths(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
-  .enter().append("path")
-    .attr("d", pathMonth);
+    weekDays = ['S','M','T','W','T','F','S']
 
-d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
-  if (error) throw error;
+    var daysOfWeek = svg
+        .append("g")
+        .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")");
 
-  var lum = d3.scaleLinear()
-    .domain([0,calorieGoal/2])
-    .range([100, 55]);
+    daysOfWeek.selectAll("text")
+        .data(weekDays)
+        .enter()
+        .append("text")
+        .attr("transform", (d,i) => "translate(6," + (cellSize * i + 12) + ")")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .attr("text-anchor", "middle")
+        .text(d => d);
 
-  var hues = ["royalblue","forestgreen","firebrick","gray"];
-  var fillColor = d3.nest()
-      .key(function(d) { return d.date; })
-      .rollup(function(d) {
-        var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-        var carbDiff = Math.max(0,(d[0].carbs*calsPerCarb/calTotal)-carbGoal)
-        var fatDiff = Math.max(0,(d[0].fat*calsPerFat/calTotal)-fatGoal)
-        var proteinDiff = Math.max(0,(d[0].protein*calsPerProtein/calTotal)-proteinGoal)
-        var diffs = [carbDiff,fatDiff,proteinDiff,0.04];
-        var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,0.04));
-        var color = d3.hcl(hues[i]);
-        color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
-        return color;
-      })
-    .object(json);
+    var rect = svg.append("g")
+        .attr("fill", "none")
+        .attr("stroke", "#ccc")
+      .selectAll("rect")
+      .data(function(d) { return d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+      .enter().append("rect")
+        .attr("width", cellSize)
+        .attr("height", cellSize)
+        .attr("x", function(d) { return d3.timeWeek.count(d3.timeYear(d), d) * cellSize; })
+        .attr("y", function(d) { return d.getDay() * cellSize; })
+        .datum(d3.timeFormat("%Y-%m-%d"));
 
-  //todo change fill color to append circle with fill color and size
-  rect.filter(function(d) { return d in fillColor; })
-      .attr("fill", d => fillColor[d]);
-});
+    svg.append("g")
+        .attr("fill", "none")
+        .attr("stroke", "#000")
+      .selectAll("path")
+      .data(function(d) { return d3.timeMonths(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+      .enter().append("path")
+        .attr("d", pathMonth);
 
-function pathMonth(t0) {
-  var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
-      d0 = t0.getDay(), w0 = d3.timeWeek.count(d3.timeYear(t0), t0),
-      d1 = t1.getDay(), w1 = d3.timeWeek.count(d3.timeYear(t1), t1);
-  return "M" + (w0 + 1) * cellSize + "," + d0 * cellSize
-      + "H" + w0 * cellSize + "V" + 7 * cellSize
-      + "H" + w1 * cellSize + "V" + (d1 + 1) * cellSize
-      + "H" + (w1 + 1) * cellSize + "V" + 0
-      + "H" + (w0 + 1) * cellSize + "Z";
+    function pathMonth(t0) {
+      var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
+          d0 = t0.getDay(), w0 = d3.timeWeek.count(d3.timeYear(t0), t0),
+          d1 = t1.getDay(), w1 = d3.timeWeek.count(d3.timeYear(t1), t1);
+      return "M" + (w0 + 1) * cellSize + "," + d0 * cellSize
+          + "H" + w0 * cellSize + "V" + 7 * cellSize
+          + "H" + w1 * cellSize + "V" + (d1 + 1) * cellSize
+          + "H" + (w1 + 1) * cellSize + "V" + 0
+          + "H" + (w0 + 1) * cellSize + "Z";
+    }
+  }
+
+  var drawPoints_ = function() {
+    d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
+      if (error) throw error;
+
+      var lum = d3.scaleLinear()
+        .domain([0,calorieGoal/2])
+        .range([100, 55]);
+
+      var hues = ["royalblue","forestgreen","firebrick","gray"];
+      var macroThreshold = 0.04
+      var fillColor = d3.nest()
+          .key(function(d) { return d.date; })
+          .rollup(function(d) {
+            var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
+            var carbDiff = Math.max(0,(d[0].carbs*calsPerCarb/calTotal)-carbGoal)
+            var fatDiff = Math.max(0,(d[0].fat*calsPerFat/calTotal)-fatGoal)
+            var proteinDiff = Math.max(0,(d[0].protein*calsPerProtein/calTotal)-proteinGoal)
+            var diffs = [carbDiff,fatDiff,proteinDiff,macroThreshold];
+            var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
+            var color = d3.hcl(hues[i]);
+            color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
+            return color;
+          })
+        .object(json);
+
+      //todo change fill color to append circle with fill color and size
+      rect.filter(function(d) { return d in fillColor; })
+          .attr("fill", d => fillColor[d]);
+    });
+  }
+
+  return {
+    "drawCalendar": drawCalendar_,
+    "drawPoints": drawPoints_
+  }
 }
+
+var andrewMarcos = MacroPlotLib.makePlot();
+andrewMarcos.drawCalendar();
