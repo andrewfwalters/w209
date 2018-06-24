@@ -138,8 +138,8 @@ var MacroPlotLib = function() {
       if (error) throw error;
 
       var rad = d3.scaleLinear()
-        .domain([0,calorieGoal/2])
-        .range([1, (cellSize/2)]);
+        .domain([-calorieGoal/2,calorieGoal/2])
+        .range([1, cellSize/2]);
 
       var hues = ["royalblue","forestgreen","firebrick","gray"];
       var macroThreshold = 0.04
@@ -156,6 +156,14 @@ var MacroPlotLib = function() {
             //color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
             return color;
           })
+        .object(json);
+
+        var fillColor = d3.nest()
+            .key(function(d) { return d.date; })
+            .rollup(function(d) {
+              var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
+              return (rad(calTotal-calorieGoal));
+            }
         .object(json);
 
       //todo change fill color to append circle with fill color and size
