@@ -23,10 +23,22 @@ var calsDisplayMax = 0.2;
 
 var MacroPlotLib = function() {
 
+  //svg member variables
   var svg; //array of svgs for each calendar year
   var rect; //array of rects for each day in each element of svg
   var circ; //array of circles for each day in each element of svg
   var dateGroups;
+
+  //data member variables
+  var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
+  var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
+  var monthStats; //{YYYY-MM: {carb_diff_g,fat_diff_g,protein_diff_g,calorie_diff_g}}
+  var dayStats;
+
+  //visual constants
+  var hues = ["royalblue","forestgreen","firebrick","gray"];
+  var macroThreshold = 0.04;
+  calsDisplayMax = 0.2;
 
   var drawCalendar = function() {
     svg = d3.select("body")
@@ -118,20 +130,13 @@ var MacroPlotLib = function() {
     updateGoals();
   };
 
-  var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
-  var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
-  var monthStats; //{YYYY-MM: {carb_diff_g,fat_diff_g,protein_diff_g,calorie_diff_g}}
-  var dayStats;
-  var hues = ["royalblue","forestgreen","firebrick","gray"];
-  var macroThreshold = 0.04;
-  calsDisplayMax = 0.2;
-
   /* readData
    * expects an array of json objects
    * each object should have a "date" in the format "YYYY-MM-DD"
    * and the numerical attributes "carbs", "fat" and "protein"
    */
   var readData = function(url) {
+    console.log(macroData);
     d3.json(url, function(error, json) {
       //throw exception if json cannot be read (unhandled)
       if (error) throw error;
@@ -140,6 +145,7 @@ var MacroPlotLib = function() {
         .key(function(d) { return d.date; })
         .rollup(function(d) {
           var macro = macroObjectUtility(d[0].carbs,d[0].fat,d[0].protein);
+          console.log(macro);
           return macro;
         })
         .object(json);
