@@ -93,8 +93,8 @@ var MacroPlotLib = function() {
       .append("rect")
         .attr("width", cellSize)
         .attr("height", cellSize)
-        .attr("x", dateX(d))
-        .attr("y", dateY(d))
+        .attr("x", dateX)
+        .attr("y", dateY)
         .datum(d3.timeFormat("%Y-%m-%d"));
 
     svg.append("g")
