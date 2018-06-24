@@ -77,10 +77,10 @@ var MacroPlotLib = function() {
         .attr("text-anchor", "middle")
         .text(d => d);
 
-    var dateX = function(d,offset) {
+    var dateX = function(d) {
       return d3.timeWeek.count(d3.timeYear(d), d) * cellSize;
     }
-    var dateY = function(d,offset) {
+    var dateY = function(d) {
       return d.getDay() * cellSize;
     }
 
