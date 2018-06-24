@@ -30,7 +30,7 @@ var MacroPlotLib = function() {
   var dateGroups;
 
   //data member variables
-  var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
+  var macroData = {}; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
   var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
   var monthStats; //{YYYY-MM: {carb_diff_g,fat_diff_g,protein_diff_g,calorie_diff_g}}
   var dayStats;
