@@ -104,8 +104,8 @@ var MacroPlotLib = function() {
         .attr("y", rectY)
         .datum(d3.timeFormat("%Y-%m-%d"));
 
-    var circX = dateX(cellSize/2+1);
-    var circY = dateY(cellSize/2+1);
+    var circX = dateX(cellSize/2);
+    var circY = dateY(cellSize/2);
     circ = dateGroups.append("circle")
         .attr("r", cellSize/4)
         .attr("cx", circX)
