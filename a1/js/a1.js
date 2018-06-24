@@ -158,7 +158,7 @@ var MacroPlotLib = function() {
           })
         .object(json);
 
-        var fillColor = d3.nest()
+        var rLength = d3.nest()
             .key(function(d) { return d.date; })
             .rollup(function(d) {
               var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
@@ -171,7 +171,7 @@ var MacroPlotLib = function() {
       dateGroups.selectAll("circle")
         .filter(function(d) { return d in fillColor; })
           .attr("fill", d => fillColor[d])
-          .attr("r",rad);
+          .attr("r",d => rLength[d]);
     });
   };
 
