@@ -45,6 +45,7 @@ var MacroPlotLib = function() {
   // module private vars
   var svg; //array of svgs for each calendar year
   var rect; //array of rects for each day in each element of svg
+  var circ; //array of circles for each day in each element of svg
 
   var drawCalendar = function() {
     svg = d3.select("body")
@@ -84,13 +85,15 @@ var MacroPlotLib = function() {
       return d.getDay() * cellSize;
     }
 
-    rect = svg.append("g")
+    var dateGroups = svg.append("g")
         .attr("fill", "none")
         .attr("stroke", "#ccc")
       .selectAll("rect")
       .data(function(d) { return d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
       .enter()
-      .append("rect")
+      .append("g");
+
+    rect = dateGroups.append("rect")
         .attr("width", cellSize)
         .attr("height", cellSize)
         .attr("x", dateX)
