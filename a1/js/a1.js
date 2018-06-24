@@ -14,36 +14,15 @@
 var width = 960,
     height = 146,
     cellSize = 17;
-var calorieGoal = 2000,
-    carbGoal = 0.40,
-    fatGoal = 0.30,
-    proteinGoal = 0.30;
 var calsPerCarb = 4,
     calsPerFat = 9,
     calsPerProtein = 4;
 var calsDisplayMax = 0.2;
-var formatPercent = d3.format(".1%");
 
 //var MacroPlotLib = MacroPlotLib || {};
 
 var MacroPlotLib = function() {
 
-  /*
-  var goals = {
-    "carb_d": ,
-    "fat_d": ,
-    "protein_d": ,
-    "calorie_c": 2000
-  }
-
-  var calculateGoals = function() {
-    "carb_g": ,
-    "fat_g": ,
-    "protein_g": ,
-  }
-  */
-
-  // module private vars
   var svg; //array of svgs for each calendar year
   var rect; //array of rects for each day in each element of svg
   var circ; //array of circles for each day in each element of svg
@@ -132,101 +111,19 @@ var MacroPlotLib = function() {
           + "H" + (w1 + 1) * cellSize + "V" + 0
           + "H" + (w0 + 1) * cellSize + "Z";
     }
-  };
 
-  var drawPoints = function() {
-    d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
-      if (error) throw error;
-
-      var calLowerBound = calorieGoal-calorieGoal*calsDisplayMax;
-      var calUpperBound = calorieGoal+calorieGoal*calsDisplayMax;
-      var rad = d3.scaleLinear()
-        .domain([calLowerBound,calUpperBound])
-        .range([1, cellSize/2-1]);
-
-      var hues = ["royalblue","forestgreen","firebrick","gray"];
-      var macroThreshold = 0.04
-      var fillColor = d3.nest()
-          .key(function(d) { return d.date; })
-          .rollup(function(d) {
-            var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-            var carbDiff = Math.max(0,(d[0].carbs*calsPerCarb/calTotal)-carbGoal)
-            var fatDiff = Math.max(0,(d[0].fat*calsPerFat/calTotal)-fatGoal)
-            var proteinDiff = Math.max(0,(d[0].protein*calsPerProtein/calTotal)-proteinGoal)
-            var diffs = [carbDiff,fatDiff,proteinDiff,macroThreshold];
-            var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
-            var color = d3.hcl(hues[i]);
-            return color;
-          })
-        .object(json);
-
-        console.log(fillColor);
-
-        var rLength = d3.nest()
-            .key(function(d) { return d.date; })
-            .rollup(function(d) {
-              var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-              var r = rad(Math.max(Math.min(calUpperBound,calTotal),calLowerBound));
-              return r;
-            })
-        .object(json);
-
-      dateGroups.selectAll("circle")
-        .filter(function(d) { return d in fillColor; })
-          .attr("fill", d => fillColor[d])
-          .attr("r",d => rLength[d]);
-    });
+    var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
+    readData(url);
+    updateGoals();
   };
 
   var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
   var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
   var monthStats; //{YYYY-MM: {carb_diff_g,fat_diff_g,protein_diff_g,calorie_diff_g}}
   var dayStats;
-
   var hues = ["royalblue","forestgreen","firebrick","gray"];
   var macroThreshold = 0.04;
   calsDisplayMax = 0.2;
-
-  var calculateGoalUpdate = function() {
-    var calLowerBound = macroGoals.calorie_c-macroGoals.calorie_c*calsDisplayMax;
-    var calUpperBound = macroGoals.calorie_c+macroGoals.calorie_c*calsDisplayMax;
-    var rad = d3.scaleLinear()
-      .domain([calLowerBound,calUpperBound])
-      .range([1, cellSize/2-1]);
-
-    Object.keys(macroData).map(function(key, index) {
-      //calculate fill color
-      var carbDiff = Math.max(0,(macroData[key].carb_d)-macroGoals.carb_d);
-      var fatDiff = Math.max(0,(macroData[key].fat_d)-macroGoals.fat_d);
-      var proteinDiff = Math.max(0,(macroData[key].protein_d)-macroGoals.protein_d);
-      var diffs = [carbDiff,fatDiff,proteinDiff,macroThreshold];
-      var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
-      macroData[key].fillColor = d3.hcl(hues[i]);
-      //calculate radius
-      macroData[key].r = rad(Math.max(Math.min(calUpperBound,calTotal),calLowerBound));
-    });
-  }//calculateGoalUpdate
-
-  var updateGoals = function() {
-    macroGoals = macroObjectUtility(200,66,150);
-    calculateGoalUpdate();
-  }
-
-  var macroObjectUtility = function(carb_g,fat_g,protein_g) {
-    var ret = {
-      "carbs_g":carb_g,
-      "fat_g":fat_g,
-      "protein_g":protein_g
-    };
-    var carb_c = carb_g*calsPerCarb;
-    var fat_c = fat_g*calsPerFat;
-    var protein_c = protein_g*calsPerProtein;
-    ret.calorie_c = carb_c+fat_c+protein_c;
-    ret.carb_d = carb_c/ret.calorie_c;
-    ret.fat_d = fat_c/ret.calorie_c;
-    ret.protein_d = protein_c/ret.calorie_c;
-    return ret;
-  }
 
   /* readData
    * expects an array of json objects
@@ -248,15 +145,63 @@ var MacroPlotLib = function() {
     }); //d3.json
   }; //readData
 
+  var updateGoals = function() {
+    macroGoals = macroObjectUtility(200,66,150);
+    calculateGoalUpdate();
+    drawGoalUpdate();
+  }
+
+  var calculateGoalUpdate = function() {
+    var calLowerBound = macroGoals.calorie_c-macroGoals.calorie_c*calsDisplayMax;
+    var calUpperBound = macroGoals.calorie_c+macroGoals.calorie_c*calsDisplayMax;
+    var rad = d3.scaleLinear()
+      .domain([calLowerBound,calUpperBound])
+      .range([1, cellSize/2-1]);
+
+    Object.keys(macroData).map(function(key, index) {
+      //calculate fill color
+      var carbDiff = Math.max(0,(macroData[key].carb_d)-macroGoals.carb_d);
+      var fatDiff = Math.max(0,(macroData[key].fat_d)-macroGoals.fat_d);
+      var proteinDiff = Math.max(0,(macroData[key].protein_d)-macroGoals.protein_d);
+      var diffs = [carbDiff,fatDiff,proteinDiff,macroThreshold];
+      var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
+      macroData[key].fillColor = d3.hcl(hues[i]);
+      //calculate radius
+      macroData[key].r = rad(Math.max(Math.min(calUpperBound,calTotal),calLowerBound));
+    });
+  }//calculateGoalUpdate
+
+  var drawGoalUpdate = function() {
+    dateGroups.selectAll("circle")
+      .filter(function(d) { return d in fillColor; })
+        .attr("fill", d => macroData[d].fillColor)
+        .attr("r",d => macroData[d].r);
+  }//drawGoalUpdate
+
+  var macroObjectUtility = function(carb_g,fat_g,protein_g) {
+    var ret = {
+      "carbs_g":carb_g,
+      "fat_g":fat_g,
+      "protein_g":protein_g
+    };
+    var carb_c = carb_g*calsPerCarb;
+    var fat_c = fat_g*calsPerFat;
+    var protein_c = protein_g*calsPerProtein;
+    ret.calorie_c = carb_c+fat_c+protein_c;
+    ret.carb_d = carb_c/ret.calorie_c;
+    ret.fat_d = fat_c/ret.calorie_c;
+    ret.protein_d = protein_c/ret.calorie_c;
+    return ret;
+  }//macroObjectUtility
+
   return {
-    "drawCalendar": drawCalendar,
-    "drawPoints": drawPoints
+    "drawCalendar": drawCalendar
   };
 };//MacroPlotLib
 
 var andrewMarcos = MacroPlotLib();
 var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
 andrewMarcos.drawCalendar();
-andrewMarcos.drawPoints();
+//andrewMarcos.drawPoints();
 //andrewMarcos.drawGraphic();
 //andrewMarcos.setGoals();
