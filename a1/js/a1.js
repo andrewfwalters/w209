@@ -144,10 +144,10 @@ var MacroPlotLib = function() {
       macroData = d3.nest()
         .key(function(d) { return d.date; })
         .rollup(function(d) {
-          var macro = macroObjectUtility(d[0].carbs,d[0].fat,d[0].protein);
-          console.log(macro);
-          return macro;
-        })
+            var macro = macroObjectUtility(d[0].carbs,d[0].fat,d[0].protein);
+            console.log(macro);
+            return macro;
+          })
         .object(json);
     }); //d3.json
     console.log(macroData);
@@ -181,7 +181,7 @@ var MacroPlotLib = function() {
 
   var drawGoalUpdate = function() {
     dateGroups.selectAll("circle")
-      .filter(function(d) { return d in fillColor; })
+      .filter(function(d) { return d in macroData; })
         .attr("fill", d => macroData[d].fillColor)
         .attr("r",d => macroData[d].r);
   }//drawGoalUpdate
