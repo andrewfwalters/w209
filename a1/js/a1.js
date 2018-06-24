@@ -99,6 +99,8 @@ var MacroPlotLib = function() {
 
     var rectX = dateX(0);
     var rectY = dateY(0);
+    console.log("rectX:");
+    console.log(rectX);
     rect = dateGroups.append("rect")
         .attr("width", cellSize)
         .attr("height", cellSize)
