@@ -78,13 +78,6 @@ var MacroPlotLib = function() {
         .attr("text-anchor", "middle")
         .text(d => d);
 
-    var dateX = function(d,offset) {
-      return d3.timeWeek.count(d3.timeYear(d), d) * cellSize;
-    }
-    var dateY = function(d,offset) {
-      return d.getDay() * cellSize;
-    }
-
     var dateGroups = svg.append("g")
         .attr("fill", "none")
         .attr("stroke", "#ccc")
@@ -93,17 +86,28 @@ var MacroPlotLib = function() {
       .enter()
       .append("g");
 
+    var dateX = function(offset,d) {
+      return function(d) {d3.timeWeek.count(d3.timeYear(d), d) * cellSize + offset;}
+    }
+    var dateY = function(offset,d) {
+      return function(d) {d.getDay() * cellSize + offset;}
+    }
+
+    var rectX = dateX(0);
+    var rectY = dateY(0);
     rect = dateGroups.append("rect")
         .attr("width", cellSize)
         .attr("height", cellSize)
-        .attr("x", dateX)
-        .attr("y", dateY)
+        .attr("x", rectX)
+        .attr("y", rectY)
         .datum(d3.timeFormat("%Y-%m-%d"));
 
+    var circX = dateX(cellSize/2+1);
+    var circY = dateY(cellSize/2+1);
     circ = dateGroups.append("circle")
         .attr("r", cellSize/4)
-        .attr("cx", dateX)
-        .attr("cy", dateY)
+        .attr("cx", circX)
+        .attr("cy", circY)
         .attr("fill", "black")
         .datum(d3.timeFormat("%Y-%m-%d"));
 
