@@ -114,6 +114,7 @@ var MacroPlotLib = function() {
 
     var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
     readData(url);
+    console.log(macroData);
     updateGoals();
   };
 
