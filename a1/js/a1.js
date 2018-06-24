@@ -165,7 +165,7 @@ var MacroPlotLib = function() {
             .key(function(d) { return d.date; })
             .rollup(function(d) {
               var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-              var r = rad(Math.max(Math.min(calUpperBound,calTotal-calorieGoal),calLowerBound));
+              var r = rad(Math.max(Math.min(calUpperBound,calTotal),calLowerBound));
               return r;
             })
         .object(json);
