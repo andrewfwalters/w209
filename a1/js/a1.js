@@ -91,7 +91,6 @@ var MacroPlotLib = function() {
     }
     var dateY = function(offset) {
       return d => d.getDay() * cellSize + offset;
-      }
     }
 
     var rectX = dateX(0);
