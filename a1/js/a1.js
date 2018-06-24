@@ -150,6 +150,7 @@ var MacroPlotLib = function() {
         })
         .object(json);
     }); //d3.json
+    console.log(macroData);
   }; //readData
 
   var updateGoals = function() {
