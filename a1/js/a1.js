@@ -156,10 +156,11 @@ var MacroPlotLib = function() {
             var diffs = [carbDiff,fatDiff,proteinDiff,macroThreshold];
             var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
             var color = d3.hcl(hues[i]);
-            //color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
             return color;
           })
         .object(json);
+
+        console.log(fillColor);
 
         var rLength = d3.nest()
             .key(function(d) { return d.date; })
@@ -170,13 +171,19 @@ var MacroPlotLib = function() {
             })
         .object(json);
 
-      //todo change fill color to append circle with fill color and size
       dateGroups.selectAll("circle")
         .filter(function(d) { return d in fillColor; })
           .attr("fill", d => fillColor[d])
           .attr("r",d => rLength[d]);
     });
   };
+
+  var circleFill;
+  var circleR;
+  var monthStats;
+  var macroCalculator = function() {
+
+  }
 
   return {
     "drawCalendar": drawCalendar,
@@ -187,3 +194,5 @@ var MacroPlotLib = function() {
 var andrewMarcos = MacroPlotLib();
 andrewMarcos.drawCalendar();
 andrewMarcos.drawPoints();
+//andrewMarcos.drawGraphic();
+//andrewMarcos.setGoals();
