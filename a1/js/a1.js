@@ -86,11 +86,15 @@ var MacroPlotLib = function() {
       .enter()
       .append("g");
 
-    var dateX = function(offset,d) {
-      return function(d) {d3.timeWeek.count(d3.timeYear(d), d) * cellSize + offset;}
+    var dateX = function(offset) {
+      return function(d) {
+        d3.timeWeek.count(d3.timeYear(d), d) * cellSize + offset;
+      }
     }
-    var dateY = function(offset,d) {
-      return function(d) {d.getDay() * cellSize + offset;}
+    var dateY = function(offset) {
+      return function(d) {
+        d.getDay() * cellSize + offset;
+      }
     }
 
     var rectX = dateX(0);
