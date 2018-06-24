@@ -21,6 +21,7 @@ var calorieGoal = 2000,
 var calsPerCarb = 4,
     calsPerFat = 9,
     calsPerProtein = 4;
+var calsDisplayMax = 0.2;
 var formatPercent = d3.format(".1%");
 
 //var MacroPlotLib = MacroPlotLib || {};
@@ -137,9 +138,11 @@ var MacroPlotLib = function() {
     d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
       if (error) throw error;
 
+      var calLowerBound = calorieGoal-calorieGoal*calsDisplayMax;
+      var calUpperBound = calorieGoal+calorieGoal*calsDisplayMax;
       var rad = d3.scaleLinear()
-        .domain([-calorieGoal/3,calorieGoal/3])
-        .range([1, cellSize/2-2]);
+        .domain([calLowerBound,calUpperBound])
+        .range([1, cellSize/2-1]);
 
       var hues = ["royalblue","forestgreen","firebrick","gray"];
       var macroThreshold = 0.04
@@ -162,7 +165,7 @@ var MacroPlotLib = function() {
             .key(function(d) { return d.date; })
             .rollup(function(d) {
               var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-              var r = rad(Math.max(Math.min(calorieGoal/3,calTotal-calorieGoal),-calorieGoal/3));
+              var r = rad(Math.max(Math.min(calUpperBound,calTotal-calorieGoal),calLowerBound));
               return r;
             })
         .object(json);
