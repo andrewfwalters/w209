@@ -161,8 +161,8 @@ var MacroPlotLib = function() {
       //todo change fill color to append circle with fill color and size
       dateGroups.selectAll("circle")
         .filter(function(d) { return d in fillColor; })
-          .attr("fill", d => fillColor[d]);
-          //.attr("r",rad);
+          .attr("fill", d => fillColor[d])
+          .attr("r",rad);
     });
   };
 
