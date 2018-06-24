@@ -110,7 +110,7 @@ var MacroPlotLib = function() {
         .attr("r", cellSize/4)
         .attr("cx", circX)
         .attr("cy", circY)
-        .attr("fill", "black")
+        .attr("fill", "none")
         .datum(d3.timeFormat("%Y-%m-%d"));
 
     svg.append("g")
