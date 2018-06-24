@@ -90,8 +90,7 @@ var MacroPlotLib = function() {
       return d => d3.timeWeek.count(d3.timeYear(d), d) * cellSize + offset;
     }
     var dateY = function(offset) {
-      return function(d) {
-        d.getDay() * cellSize + offset;
+      return d => d.getDay() * cellSize + offset;
       }
     }
 
