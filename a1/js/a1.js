@@ -163,7 +163,7 @@ var MacroPlotLib = function() {
             .rollup(function(d) {
               var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
               return (rad(calTotal-calorieGoal));
-            }
+            })
         .object(json);
 
       //todo change fill color to append circle with fill color and size
