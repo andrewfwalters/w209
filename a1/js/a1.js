@@ -78,10 +78,10 @@ var MacroPlotLib = function() {
         .attr("text-anchor", "middle")
         .text(d => d);
 
-    var dateX = function(d) {
+    var dateX = function(d,offset) {
       return d3.timeWeek.count(d3.timeYear(d), d) * cellSize;
     }
-    var dateY = function(d) {
+    var dateY = function(d,offset) {
       return d.getDay() * cellSize;
     }
 
@@ -98,6 +98,13 @@ var MacroPlotLib = function() {
         .attr("height", cellSize)
         .attr("x", dateX)
         .attr("y", dateY)
+        .datum(d3.timeFormat("%Y-%m-%d"));
+
+    circ = dateGroups.append("circle")
+        .attr("r", cellSize/4)
+        .attr("cx", dateX)
+        .attr("cy", dateY)
+        .attr("fill", "black")
         .datum(d3.timeFormat("%Y-%m-%d"));
 
     svg.append("g")
