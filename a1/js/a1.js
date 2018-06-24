@@ -178,20 +178,84 @@ var MacroPlotLib = function() {
     });
   };
 
-  var circleFill;
-  var circleR;
-  var monthStats;
-  var macroCalculator = function() {
+  var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
+  var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
+  var monthStats; //{YYYY-MM: {carb_diff_g,fat_diff_g,protein_diff_g,calorie_diff_g}}
+  var dayStats;
 
+  var hues = ["royalblue","forestgreen","firebrick","gray"];
+  var macroThreshold = 0.04;
+  calsDisplayMax = 0.2;
+
+  var calculateGoalUpdate = function() {
+    var calLowerBound = macroGoals.calorie_c-macroGoals.calorie_c*calsDisplayMax;
+    var calUpperBound = macroGoals.calorie_c+macroGoals.calorie_c*calsDisplayMax;
+    var rad = d3.scaleLinear()
+      .domain([calLowerBound,calUpperBound])
+      .range([1, cellSize/2-1]);
+
+    Object.keys(macroData).map(function(key, index) {
+      //calculate fill color
+      var carbDiff = Math.max(0,(macroData[key].carb_d)-macroGoals.carb_d);
+      var fatDiff = Math.max(0,(macroData[key].fat_d)-macroGoals.fat_d);
+      var proteinDiff = Math.max(0,(macroData[key].protein_d)-macroGoals.protein_d);
+      var diffs = [carbDiff,fatDiff,proteinDiff,macroThreshold];
+      var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
+      macroData[key].fillColor = d3.hcl(hues[i]);
+      //calculate radius
+      macroData[key].r = rad(Math.max(Math.min(calUpperBound,calTotal),calLowerBound));
+    });
+  }//calculateGoalUpdate
+
+  var updateGoals = function() {
+    macroGoals = macroObjectUtility(200,66,150);
+    calculateGoalUpdate();
   }
+
+  var macroObjectUtility = function(carb_g,fat_g,protein_g) {
+    var ret = {
+      "carbs_g":carb_g,
+      "fat_g":fat_g,
+      "protein_g":protein_g
+    };
+    var carb_c = carb_g*calsPerCarb;
+    var fat_c = fat_g*calsPerFat;
+    var protein_c = protein_g*calsPerProtein;
+    ret.calorie_c = carb_c+fat_c+protein_c;
+    ret.carb_d = carb_c/ret.calorie_c;
+    ret.fat_d = fat_c/ret.calorie_c;
+    ret.protein_d = protein_c/ret.calorie_c;
+    return ret;
+  }
+
+  /* readData
+   * expects an array of json objects
+   * each object should have a "date" in the format "YYYY-MM-DD"
+   * and the numerical attributes "carbs", "fat" and "protein"
+   */
+  var readData = function(url) {
+    d3.json(url, function(error, json) {
+      //throw exception if json cannot be read (unhandled)
+      if (error) throw error;
+      //read json into memory as macroData
+      macroData = d3.nest()
+        .key(function(d) { return d.date; })
+        .rollup(function(d) {
+          var macro = macroObjectUtility(d[0].carbs,d[0].fat,d[0].protein);
+          return macro;
+        })
+        .object(json);
+    }); //d3.json
+  }; //readData
 
   return {
     "drawCalendar": drawCalendar,
     "drawPoints": drawPoints
   };
-};
+};//MacroPlotLib
 
 var andrewMarcos = MacroPlotLib();
+var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
 andrewMarcos.drawCalendar();
 andrewMarcos.drawPoints();
 //andrewMarcos.drawGraphic();
