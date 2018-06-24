@@ -112,6 +112,7 @@ var MacroPlotLib = function() {
         .attr("cx", circX)
         .attr("cy", circY)
         .attr("fill", "none")
+        .attr("stroke", "none")
         .datum(d3.timeFormat("%Y-%m-%d"));
 
     svg.append("g")
@@ -162,8 +163,8 @@ var MacroPlotLib = function() {
       //todo change fill color to append circle with fill color and size
       dateGroups.selectAll("circle")
         .filter(function(d) { return d in fillColor; })
-          .attr("fill", d => fillColor[d])
-          .attr("r",rad);
+          .attr("fill", d => fillColor[d]);
+          //.attr("r",rad);
     });
   };
 
