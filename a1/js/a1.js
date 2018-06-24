@@ -46,6 +46,7 @@ var MacroPlotLib = function() {
   var svg; //array of svgs for each calendar year
   var rect; //array of rects for each day in each element of svg
   var circ; //array of circles for each day in each element of svg
+  var dateGroups;
 
   var drawCalendar = function() {
     svg = d3.select("body")
@@ -78,7 +79,7 @@ var MacroPlotLib = function() {
         .attr("text-anchor", "middle")
         .text(d => d);
 
-    var dateGroups = svg.append("g")
+    dateGroups = svg.append("g")
         .attr("fill", "none")
         .attr("stroke", "#ccc")
       .selectAll("rect")
@@ -137,9 +138,9 @@ var MacroPlotLib = function() {
     d3.json("http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json", function(error, json) {
       if (error) throw error;
 
-      var lum = d3.scaleLinear()
+      var rad = d3.scaleLinear()
         .domain([0,calorieGoal/2])
-        .range([100, 55]);
+        .range([1, (cellSize/2)]);
 
       var hues = ["royalblue","forestgreen","firebrick","gray"];
       var macroThreshold = 0.04
@@ -153,19 +154,15 @@ var MacroPlotLib = function() {
             var diffs = [carbDiff,fatDiff,proteinDiff,macroThreshold];
             var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
             var color = d3.hcl(hues[i]);
-            color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
+            //color.l = lum(Math.min(calorieGoal/2,Math.abs(calTotal-calorieGoal)));
             return color;
           })
         .object(json);
 
       //todo change fill color to append circle with fill color and size
-      rect.filter(function(d) { return d in fillColor; })
-          .append("circle")
-          //.attr("cx",10)
-          //.attr("cy",10)
-          .attr("r",5)
-          .attr("fill","firebrick");
-          //.attr("fill", d => fillColor[d]);
+      dateGroups.selectAll("circle")
+        .filter(function(d) { return d in fillColor; })
+          .attr("fill", d => fillColor[d]);
     });
   };
 
