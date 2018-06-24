@@ -139,7 +139,7 @@ var MacroPlotLib = function() {
 
       var rad = d3.scaleLinear()
         .domain([-calorieGoal/2,calorieGoal/2])
-        .range([2, cellSize/2]);
+        .range([1, cellSize/2-2]);
 
       var hues = ["royalblue","forestgreen","firebrick","gray"];
       var macroThreshold = 0.04
