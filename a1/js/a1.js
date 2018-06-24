@@ -138,7 +138,7 @@ var MacroPlotLib = function() {
       if (error) throw error;
 
       var rad = d3.scaleLinear()
-        .domain([-calorieGoal/2,calorieGoal/2])
+        .domain([-calorieGoal/3,calorieGoal/3])
         .range([1, cellSize/2-2]);
 
       var hues = ["royalblue","forestgreen","firebrick","gray"];
@@ -162,7 +162,7 @@ var MacroPlotLib = function() {
             .key(function(d) { return d.date; })
             .rollup(function(d) {
               var calTotal = d[0].carbs*calsPerCarb + d[0].fat*calsPerFat + d[0].protein*calsPerProtein;
-              var r = rad(Math.max(Math.min(calorieGoal/2,calTotal-calorieGoal),-calorieGoal/2));
+              var r = rad(Math.max(Math.min(calorieGoal/3,calTotal-calorieGoal),-calorieGoal/3));
               return r;
             })
         .object(json);
