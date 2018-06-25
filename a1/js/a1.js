@@ -165,8 +165,8 @@ var MacroPlotLib = function() {
       .attr("transform", "translate(0," + (cellSize*1) + ")");
 
     detailBox.append("text")
-      .attr("width", cellSize*7)
-      .attr("height", cellSize*0.5)
+      .attr("x", cellSize*7)
+      .attr("y", cellSize*0.5)
       .attr("font-family", "sans-serif")
       .attr("font-size", 10)
       .style("text-anchor", "middle")
