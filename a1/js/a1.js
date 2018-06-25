@@ -19,8 +19,6 @@ var calsPerCarb = 4,
     calsPerProtein = 4;
 var calsDisplayMax = 0.2;
 
-//var MacroPlotLib = MacroPlotLib || {};
-
 var MacroPlotLib = function() {
 
   //svg member variables
@@ -40,7 +38,7 @@ var MacroPlotLib = function() {
   var macroThreshold = 0.04;
   calsDisplayMax = 0.2;
 
-  var drawCalendar = function() {
+  var drawCalendar = function(url) {
     svg = d3.select("body")
       .selectAll("svg")
       .data(d3.range(2017, 2019))
@@ -124,7 +122,7 @@ var MacroPlotLib = function() {
           + "H" + (w0 + 1) * cellSize + "Z";
     }
 
-    var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
+    //read in data and populate calendar
     readData(url);
   };
 
@@ -145,7 +143,6 @@ var MacroPlotLib = function() {
             return macro;
           })
         .object(json);
-      console.log(macroData);
       updateGoals();
     }); //d3.json
 
@@ -207,7 +204,7 @@ var MacroPlotLib = function() {
 
 var andrewMarcos = MacroPlotLib();
 var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
-andrewMarcos.drawCalendar();
+andrewMarcos.drawCalendar(url);
 //andrewMarcos.drawPoints();
 //andrewMarcos.drawGraphic();
 //andrewMarcos.setGoals();
