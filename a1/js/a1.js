@@ -19,7 +19,7 @@ var MacroPlotLib = function() {
 
   //layout constants
   var width = 960,
-      height = 146,
+      height = 158,
       cellSize = 17;
 
   //svg member variables
