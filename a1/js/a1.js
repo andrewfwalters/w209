@@ -161,7 +161,7 @@ var MacroPlotLib = function() {
     detailBox.append("rect")
       .attr("width", cellSize*12)
       .attr("height", cellSize*3)
-      .attr("fill","grey");
+      .attr("fill","grey")
       .attr("transform", "translate(0," + (cellSize*2) + ")");
 
 /*copied stuff
