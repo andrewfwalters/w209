@@ -101,6 +101,7 @@ var MacroPlotLib = function() {
         .attr("height", cellSize)
         .attr("x", rectX)
         .attr("y", rectY)
+        .attr("fill","white")
         .datum(d3.timeFormat("%Y-%m-%d"))
         .on("mousedown",clickDateEvent);
 
