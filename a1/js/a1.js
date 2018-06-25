@@ -96,7 +96,7 @@ var MacroPlotLib = function() {
     var circX = dateX(cellSize/2);
     var circY = dateY(cellSize/2);
     circ = dateGroups.append("circle")
-        .attr("r", cellSize/4)
+        .attr("r", 1)
         .attr("cx", circX)
         .attr("cy", circY)
         .attr("fill", "none")
@@ -178,7 +178,7 @@ var MacroPlotLib = function() {
     dateGroups.selectAll("circle")
       .filter(function(d) { return d in macroData; })
         .transition()
-          .duration(3000)
+          .duration(1000)
           .attr("fill", d => macroData[d].fillColor)
           .attr("r",d => macroData[d].r);
   }//drawGoalUpdate
