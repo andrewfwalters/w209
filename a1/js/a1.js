@@ -141,7 +141,7 @@ var MacroPlotLib = function() {
       //throw exception if json cannot be read (unhandled)
       if (error) throw error;
       //read json into memory as macroData
-      macroData = d3.nest()
+      var a = d3.nest()
         .key(function(d) { return d.date; })
         .rollup(function(d) {
             var macro = macroObjectUtility(d[0].carbs,d[0].fat,d[0].protein);
@@ -150,7 +150,7 @@ var MacroPlotLib = function() {
           })
         .object(json);
     }); //d3.json
-    console.log(macroData);
+    console.log(a);
   }; //readData
 
   var updateGoals = function() {
