@@ -52,7 +52,7 @@ var MacroPlotLib = function() {
         .attr("width", width)
         .attr("height", height)
       .append("g")
-        .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 13) + ")");
+        .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
     //draw the year on top of each year's svg
     svg.append("text")
@@ -156,7 +156,12 @@ var MacroPlotLib = function() {
     detailBox.append("rect")
       .attr("width", cellSize*12)
       .attr("height", cellSize*2)
-      .attr("fill","black")
+      .attr("fill","black");
+
+    detailBox.append("rect")
+      .attr("width", cellSize*12)
+      .attr("height", cellSize*2)
+      .attr("fill","black");
 
 /*copied stuff
     var hoverGroup = chart.append("g").style("visibility","hidden");
