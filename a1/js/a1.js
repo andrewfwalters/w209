@@ -126,8 +126,6 @@ var MacroPlotLib = function() {
 
     var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
     readData(url);
-    console.log(macroData);
-    updateGoals();
   };
 
   /* readData
@@ -136,7 +134,6 @@ var MacroPlotLib = function() {
    * and the numerical attributes "carbs", "fat" and "protein"
    */
   var readData = function(url) {
-    console.log(macroData);
     d3.json(url, function(error, json) {
       //throw exception if json cannot be read (unhandled)
       if (error) throw error;
@@ -145,11 +142,11 @@ var MacroPlotLib = function() {
         .key(function(d) { return d.date; })
         .rollup(function(d) {
             var macro = macroObjectUtility(d[0].carbs,d[0].fat,d[0].protein);
-            console.log(macro);
             return macro;
           })
         .object(json);
       console.log(macroData);
+      updateGoals();
     }); //d3.json
 
   }; //readData
