@@ -135,7 +135,19 @@ var MacroPlotLib = function() {
           + "H" + (w0 + 1) * cellSize + "Z";
     }
 
-    //legend
+    //add an svg to hold the goal sliders
+    var topBox = d3.select("#goalContainer")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", cellSize*5+10)
+      .append("g")
+      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + ",0)");
+
+    var sliderNames = ["carb","fat","protein"];
+    var sliderGroups = topBox.selectAll("g")
+      .data(sliderNames)
+      .enter()
+      .append(g);
 
     //add an svg to hold legend and detail box
     var bottomBox = d3.select("#legendContainer")
@@ -153,18 +165,17 @@ var MacroPlotLib = function() {
     detailBox = bottomBox.append("g")
       .style("visibility","hidden")
       .attr("transform", "translate(" + (cellSize * 38) + ",0)");
-
     detailBox.append("rect")
       .attr("width", cellSize*14)
       .attr("height", cellSize*1)
       .attr("fill","lightblue");
-
     detailBox.append("rect")
       .attr("width", cellSize*14)
       .attr("height", cellSize*4)
       .attr("fill","aliceblue")
       .attr("transform", "translate(0," + (cellSize*1) + ")");
 
+    //draw 5 lines of text in the detail box
     detailBox.selectAll("text")
       .data(d3.range(0, 5))
       .enter()
@@ -175,7 +186,7 @@ var MacroPlotLib = function() {
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
         .style("text-anchor", "middle")
-        .text("Test Text!")
+        .text("text box")
         .attr("transform", d => "translate(0," + (cellSize*d) + ")");
 
     //read in data and populate calendar
