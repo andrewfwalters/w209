@@ -11,24 +11,25 @@
 //todo scale svg
 
 // Global Constants
-var width = 960,
-    height = 146,
-    cellSize = 17;
 var calsPerCarb = 4,
     calsPerFat = 9,
     calsPerProtein = 4;
-var calsDisplayMax = 0.2;
 
 var MacroPlotLib = function() {
+
+  //layout constants
+  var width = 960,
+      height = 146,
+      cellSize = 17;
 
   //svg member variables
   var svg; //array of svgs for each calendar year
   var rect; //array of rects for each day in each element of svg
   var circ; //array of circles for each day in each element of svg
-  var dateGroups;
+  var dateGroups; //group holding the circ and rect elements
 
   //data member variables
-  var macroData = {}; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
+  var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
   var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
   var monthStats; //{YYYY-MM: {carb_diff_g,fat_diff_g,protein_diff_g,calorie_diff_g}}
   var dayStats;
@@ -38,7 +39,8 @@ var MacroPlotLib = function() {
   var macroThreshold = 0.04;
   calsDisplayMax = 0.2;
 
-  var drawCalendar = function(url) {
+  var drawMacroPlot = function(url) {
+    //draw an svg for each year
     svg = d3.select("body")
       .selectAll("svg")
       .data(d3.range(2017, 2019))
@@ -48,6 +50,7 @@ var MacroPlotLib = function() {
       .append("g")
         .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
+    //draw the year on top of each year's svg
     svg.append("text")
         .attr("transform", "translate(" + cellSize * 26 + ",-6)")
         .attr("font-family", "sans-serif")
@@ -55,8 +58,8 @@ var MacroPlotLib = function() {
         .attr("text-anchor", "middle")
         .text(d => d);
 
+    //draw the days of the week to the left of each year
     weekDays = ['S','M','T','W','T','F','S']
-
     svg.append("g")
         .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")")
         .selectAll("text")
@@ -69,6 +72,7 @@ var MacroPlotLib = function() {
         .attr("text-anchor", "middle")
         .text(d => d);
 
+    //make a group for each day of each year
     dateGroups = svg.append("g")
         .attr("fill", "none")
         .attr("stroke", "#ccc")
@@ -77,6 +81,7 @@ var MacroPlotLib = function() {
       .enter()
       .append("g");
 
+    //define a curry-able function for the x and y coordinates of each date
     var dateX = function(offset) {
       return d => d3.timeWeek.count(d3.timeYear(d), d) * cellSize + offset;
     }
@@ -84,6 +89,7 @@ var MacroPlotLib = function() {
       return d => d.getDay() * cellSize + offset;
     }
 
+    //draw a rect for each day of each year
     var rectX = dateX(0);
     var rectY = dateY(0);
     rect = dateGroups.append("rect")
@@ -93,6 +99,7 @@ var MacroPlotLib = function() {
         .attr("y", rectY)
         .datum(d3.timeFormat("%Y-%m-%d"));
 
+    //draw a circle on top of each rect
     var circX = dateX(cellSize/2);
     var circY = dateY(cellSize/2);
     circ = dateGroups.append("circle")
@@ -103,6 +110,7 @@ var MacroPlotLib = function() {
         .attr("stroke", "none")
         .datum(d3.timeFormat("%Y-%m-%d"));
 
+    //draw lines to separate months
     svg.append("g")
         .attr("fill", "none")
         .attr("stroke", "#000")
@@ -121,6 +129,12 @@ var MacroPlotLib = function() {
           + "H" + (w1 + 1) * cellSize + "V" + 0
           + "H" + (w0 + 1) * cellSize + "Z";
     }
+
+    //legend
+
+    //detail box
+    var detailObj;
+
 
     //read in data and populate calendar
     readData(url);
@@ -204,13 +218,13 @@ var MacroPlotLib = function() {
   }//macroObjectUtility
 
   return {
-    "drawCalendar": drawCalendar
+    "drawMacroPlot": drawMacroPlot
   };
 };//MacroPlotLib
 
 var andrewMarcos = MacroPlotLib();
 var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
-andrewMarcos.drawCalendar(url);
+andrewMarcos.drawMacroPlot(url);
 //andrewMarcos.drawPoints();
 //andrewMarcos.drawGraphic();
 //andrewMarcos.setGoals();
