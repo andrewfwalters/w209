@@ -156,12 +156,12 @@ var MacroPlotLib = function() {
     detailBox.append("rect")
       .attr("width", cellSize*14)
       .attr("height", cellSize*1)
-      .attr("fill","black");
+      .attr("fill","lightblue");
 
     detailBox.append("rect")
       .attr("width", cellSize*14)
       .attr("height", cellSize*4)
-      .attr("fill","grey")
+      .attr("fill","aliceblue")
       .attr("transform", "translate(0," + (cellSize*1) + ")");
 
 /*copied stuff
