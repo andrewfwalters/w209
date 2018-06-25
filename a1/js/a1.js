@@ -288,7 +288,7 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
   }//clickDateEvent
 
   var detailString = function(macro,g,d) {
-    var str = macro + ": " + g + "g (" + d.toFixed(2) "%)";
+    var str = macro + ": " + g + "g (" + d.toFixed(2) + "%)";
     return str;
   }
 
