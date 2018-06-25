@@ -178,7 +178,7 @@ var MacroPlotLib = function() {
     dateGroups.selectAll("circle")
       .filter(function(d) { return d in macroData; })
         .transition()
-          .duration(1000)
+          .duration(500)
           .attr("fill", d => macroData[d].fillColor)
           .attr("r",d => macroData[d].r);
   }//drawGoalUpdate
