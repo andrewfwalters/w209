@@ -145,7 +145,8 @@ var MacroPlotLib = function() {
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 / 2 - 1) + ")");
 
     //draw the legend
-    var legend = bottomBox.append("g").style("visibility","hidden");
+    var legend = bottomBox.append("g");
+      //.style("visibility","hidden");
 
     //draw the detail box
     detailBox = bottomBox.append("g")
@@ -155,7 +156,7 @@ var MacroPlotLib = function() {
     detailBox.append("rect")
       .attr("width", cellSize*12)
       .attr("height", cellSize*2)
-      .attr("fill","grey")
+      .attr("fill","black")
 
 /*copied stuff
     var hoverGroup = chart.append("g").style("visibility","hidden");
