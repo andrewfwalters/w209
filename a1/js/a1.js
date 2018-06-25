@@ -101,7 +101,8 @@ var MacroPlotLib = function() {
         .attr("height", cellSize)
         .attr("x", rectX)
         .attr("y", rectY)
-        .datum(d3.timeFormat("%Y-%m-%d"));
+        .datum(d3.timeFormat("%Y-%m-%d"))
+        .on("mousedown",clickDateEvent);
 
     //draw a circle on top of each rect
     var circX = dateX(cellSize/2);
@@ -168,7 +169,7 @@ var MacroPlotLib = function() {
       .data(d3.range(0, 5))
       .enter()
       .append("text")
-        .attr("id",d => d)
+        .attr("id",d => "text" + d)
         .attr("x", cellSize*7)
         .attr("y", cellSize*0.7)
         .attr("font-family", "sans-serif")
@@ -270,6 +271,12 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
     ret.protein_d = protein_c/ret.calorie_c;
     return ret;
   }//macroObjectUtility
+
+  var clickDateEvent = function(d,i) {
+    detailBox.select("#text0")
+      .text(d);
+    detailBox.style("visibility","visible");
+  }//clickDateEvent
 
   return {
     "drawMacroPlot": drawMacroPlot
