@@ -157,7 +157,7 @@ var MacroPlotLib = function() {
       .attr("height", cellSize*2)
       .attr("fill","grey")
 
-//copied stuff
+/*copied stuff
     var hoverGroup = chart.append("g").style("visibility","hidden");
 
 hoverGroup.append("rect")
@@ -167,7 +167,7 @@ hoverGroup.append("rect")
 .attr("height",20)
 .attr("fill","rgb(100,100,100)");
 
-var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);
+var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
 
 
     //read in data and populate calendar
