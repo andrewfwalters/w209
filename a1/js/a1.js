@@ -282,7 +282,7 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
       detailBox.select("#text0")
         .text(d);
       detailBox.select("#text1")
-        .text(detailString("Carbs",macroData[d].carb_g,macroData[d].carb_g);
+        .text(detailString("Carbs",macroData[d].carb_g,macroData[d].carb_g));
       detailBox.style("visibility","visible");
     }
   }//clickDateEvent
