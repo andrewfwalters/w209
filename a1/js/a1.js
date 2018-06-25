@@ -278,7 +278,7 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
     if(detailBox.attr("visibility")==="hidden" && detailBox.select("#text0").text()===d) {
       detailBox.style("visibility","hidden");
     }
-    else {
+    else if(d in macroData) {
       detailBox.select("#text0")
         .text(d);
       detailBox.select("#text1")
