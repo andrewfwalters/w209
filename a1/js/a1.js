@@ -151,18 +151,18 @@ var MacroPlotLib = function() {
     //draw the detail box
     detailBox = bottomBox.append("g")
       //.style("visibility","hidden");
-      .attr("transform", "translate(" + (cellSize * 40) + ",0)");
+      .attr("transform", "translate(" + (cellSize * 38) + ",0)");
 
     detailBox.append("rect")
-      .attr("width", cellSize*12)
-      .attr("height", cellSize*2)
+      .attr("width", cellSize*14)
+      .attr("height", cellSize*1)
       .attr("fill","black");
 
     detailBox.append("rect")
-      .attr("width", cellSize*12)
-      .attr("height", cellSize*3)
+      .attr("width", cellSize*14)
+      .attr("height", cellSize*4)
       .attr("fill","grey")
-      .attr("transform", "translate(0," + (cellSize*2) + ")");
+      .attr("transform", "translate(0," + (cellSize*1) + ")");
 
 /*copied stuff
     var hoverGroup = chart.append("g").style("visibility","hidden");
