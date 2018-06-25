@@ -140,7 +140,7 @@ var MacroPlotLib = function() {
     var bottomBox = d3.select("#legendContainer")
       .append("svg")
       .attr("width", width)
-      .attr("height", 80)
+      .attr("height", cellSize*5+10)
       .append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (5) + ")");
 
@@ -168,6 +168,7 @@ var MacroPlotLib = function() {
       .data(d3.range(0, 5))
       .enter()
       .append("text")
+        .attr("id",d => d)
         .attr("x", cellSize*7)
         .attr("y", cellSize*0.7)
         .attr("font-family", "sans-serif")
