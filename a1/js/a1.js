@@ -282,13 +282,13 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
       detailBox.select("#text0")
         .text(d);
       detailBox.select("#text1")
-        .text(detailString("Carbs",macroData[d].carb_g,macroData[d].carb_g));
+        .text(detailString("Carbs",macroData[d].carb_g,macroData[d].carb_d));
       detailBox.style("visibility","visible");
     }
   }//clickDateEvent
 
   var detailString = function(macro,g,d) {
-    var str = macro + ": " + g + "g (" + d.toFixed(2) + "%)";
+    var str = macro + ": " + g + "g (" + d + "%)";
     return str;
   }
 
