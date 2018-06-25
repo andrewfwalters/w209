@@ -19,7 +19,7 @@ var MacroPlotLib = function() {
 
   //layout constants
   var width = 960,
-      height = 158,
+      height = 146,
       cellSize = 17;
 
   //svg member variables
@@ -140,7 +140,7 @@ var MacroPlotLib = function() {
     var bottomBox = d3.select("#legendContainer")
       .append("svg")
       .attr("width", width)
-      .attr("height", height/2)
+      .attr("height", 80)
       .append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (5) + ")");
 
