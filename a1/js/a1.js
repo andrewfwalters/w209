@@ -146,8 +146,7 @@ var MacroPlotLib = function() {
         .rollup(function(d) {
             var macro = macroObjectUtility(d[0].carbs,d[0].fat,d[0].protein);
             console.log(macro);
-            //return macro;
-            return 5;
+            return macro;
           })
         .object(json);
     }); //d3.json
