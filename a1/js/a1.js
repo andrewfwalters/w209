@@ -55,7 +55,7 @@ var MacroPlotLib = function() {
 
     //draw the year on top of each year's svg
     svg.append("text")
-        .attr("transform", "translate(" + cellSize * 26 + ",-6)")
+        .attr("transform", "translate(" + cellSize * 26 + ",-18)")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
         .attr("text-anchor", "middle")
