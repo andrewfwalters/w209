@@ -5,8 +5,6 @@
 
 //todo add a slider
 //todo add slider action
-//todo include text
-//todo add an on hover fade
 //todo write prose and takeaways
 //todo scale svg
 
@@ -145,7 +143,7 @@ var MacroPlotLib = function() {
       .attr("width", width)
       .attr("height", cellSize*5+10)
       .append("g")
-      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (5) + ")");
+      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + ",10)");
 
     //draw the legend
     var legend = bottomBox.append("g");
@@ -179,19 +177,6 @@ var MacroPlotLib = function() {
         .style("text-anchor", "middle")
         .text("Test Text!")
         .attr("transform", d => "translate(0," + (cellSize*d) + ")");
-
-/*copied stuff
-    var hoverGroup = chart.append("g").style("visibility","hidden");
-
-hoverGroup.append("rect")
-.attr("x",0)
-.attr("y",0)
-.attr("width",20)
-.attr("height",20)
-.attr("fill","rgb(100,100,100)");
-
-var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
-
 
     //read in data and populate calendar
     readData(url);
@@ -309,6 +294,3 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
 var andrewMarcos = MacroPlotLib();
 var url = "http://people.ischool.berkeley.edu/~andrewfwalters/a1/data/diet.json";
 andrewMarcos.drawMacroPlot(url);
-//andrewMarcos.drawPoints();
-//andrewMarcos.drawGraphic();
-//andrewMarcos.setGoals();
