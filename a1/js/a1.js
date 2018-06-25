@@ -147,7 +147,7 @@ var MacroPlotLib = function() {
     var sliderGroups = topBox.selectAll("g")
       .data(sliderNames)
       .enter()
-      .append(g);
+      .append("g");
 
     //add an svg to hold legend and detail box
     var bottomBox = d3.select("#legendContainer")
