@@ -151,7 +151,7 @@ var MacroPlotLib = function() {
     //draw the detail box
     detailBox = bottomBox.append("g")
       //.style("visibility","hidden");
-      .attr("transform", "translate(" + (cellSize * 40) + ",0)");
+      .attr("transform", "translate(" + (cellSize * 40) + ",30)");
 
     detailBox.append("rect")
       .attr("width", cellSize*12)
