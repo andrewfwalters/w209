@@ -34,7 +34,7 @@ var MacroPlotLib = function() {
   var macroGoals; //{"carb_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
   var monthStats; //{YYYY-MM: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
   var dayStats; //{"Monday": {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
-  var detailObj; //holds data for currently selected item in the detail box
+  var detailObj = {"isSet":false}; //holds data for currently selected item in the detail box
 
   //visual constants
   var hues = ["royalblue","forestgreen","firebrick","gray"];
@@ -275,8 +275,9 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
   }//macroObjectUtility
 
   var clickDateEvent = function(d,i) {
-    if(detailBox.attr("visibility")=="visible" && detailBox.select("#text0").text()==d) {
+    if(detailObj.isSet===true && detailObj.objKey===d) {
       detailBox.style("visibility","hidden");
+      detailObj.isSet = false;
     }
     else if(d in macroData) {
       detailBox.select("#text0")
@@ -290,6 +291,8 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
       detailBox.select("#text4")
         .text("Calories: " + macroData[d].calorie_c);
       detailBox.style("visibility","visible");
+      detailObj.objKey = d;
+      detailObj.isSet = true;
     }
   }//clickDateEvent
 
