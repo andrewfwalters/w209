@@ -114,7 +114,8 @@ var MacroPlotLib = function() {
         .attr("cy", circY)
         .attr("fill", "none")
         .attr("stroke", "none")
-        .datum(d3.timeFormat("%Y-%m-%d"));
+        .datum(d3.timeFormat("%Y-%m-%d"))
+        .on("mousedown",clickDateEvent);
 
     //draw lines to separate months
     svg.append("g")
@@ -274,10 +275,21 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
   }//macroObjectUtility
 
   var clickDateEvent = function(d,i) {
-    detailBox.select("#text0")
-      .text(d);
-    detailBox.style("visibility","visible");
+    if(detailBox.attr("visibility")==="hidden" && detailBox.select("#text0").text()===d) {
+      detailBox.style("visibility","hidden");
+    }
+    else {
+      detailBox.select("#text0")
+        .text(d);
+      detailBox.select("#text1")
+        .text(detailString("Carbs",macroData[d].carb_g,macroData[d].carb_g);
+      detailBox.style("visibility","visible");
+    }
   }//clickDateEvent
+
+  var detailString = function(macro,g,d) {
+    return macro + ": " + g + "g (" + d.toFixed(2) "%)";
+  }
 
   return {
     "drawMacroPlot": drawMacroPlot
