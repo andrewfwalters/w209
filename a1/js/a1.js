@@ -27,6 +27,7 @@ var MacroPlotLib = function() {
   var rect; //array of rects for each day in each element of svg
   var circ; //array of circles for each day in each element of svg
   var dateGroups; //group holding the circ and rect elements
+  var detailBox;
 
   //data member variables
   var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
@@ -135,15 +136,38 @@ var MacroPlotLib = function() {
 
     //legend
 
-    //detail box
-    var legend = d3.select("#legendContainer")
+    //add an svg to hold legend and detail box
+    var bottomBox = d3.select("#legendContainer")
       .append("svg")
       .attr("width", width)
-      .attr("height", height)
+      .attr("height", height/2)
       .append("g")
-      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 / 2 - 1) + ")");
 
+    //draw the legend
+    var legend = bottomBox.append("g").style("visibility","hidden");
 
+    //draw the detail box
+    detailBox = bottomBox.append("g")
+      //.style("visibility","hidden");
+      .attr("transform", "translate(" + (cellSize * 40) + ",0)");
+
+    detailBox.append("rect")
+      .attr("width", cellSize*12)
+      .attr("height", cellSize*2)
+      .attr("fill","grey")
+
+//copied stuff
+    var hoverGroup = chart.append("g").style("visibility","hidden");
+
+hoverGroup.append("rect")
+.attr("x",0)
+.attr("y",0)
+.attr("width",20)
+.attr("height",20)
+.attr("fill","rgb(100,100,100)");
+
+var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);
 
 
     //read in data and populate calendar
