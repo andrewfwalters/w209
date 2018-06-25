@@ -31,7 +31,7 @@ var MacroPlotLib = function() {
 
   //data member variables
   var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
-  var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
+  var macroGoals; //{"carb_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
   var monthStats; //{YYYY-MM: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
   var dayStats; //{"Monday": {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
   var detailObj; //holds data for currently selected item in the detail box
@@ -260,7 +260,7 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
    */
   var macroObjectUtility = function(carb_g,fat_g,protein_g) {
     var ret = {
-      "carbs_g":carb_g,
+      "carb_g":carb_g,
       "fat_g":fat_g,
       "protein_g":protein_g
     };
@@ -275,7 +275,7 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
   }//macroObjectUtility
 
   var clickDateEvent = function(d,i) {
-    if(detailBox.attr("visibility")==="hidden" && detailBox.select("#text0").text()===d) {
+    if(detailBox.attr("visibility")==="visible" && detailBox.select("#text0").text()===d) {
       detailBox.style("visibility","hidden");
     }
     else if(d in macroData) {
@@ -283,12 +283,18 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
         .text(d);
       detailBox.select("#text1")
         .text(detailString("Carbs",macroData[d].carb_g,macroData[d].carb_d));
+      detailBox.select("#text2")
+        .text(detailString("Fats",macroData[d].fat_g,macroData[d].fat_d));
+      detailBox.select("#text3")
+        .text(detailString("Protein",macroData[d].protein_g,macroData[d].protein_d));
+      detailBox.select("#text4")
+        .text("Calories: " + macroData[d].calorie_c);
       detailBox.style("visibility","visible");
     }
   }//clickDateEvent
 
   var detailString = function(macro,g,d) {
-    var str = macro + ": " + g + "g (" + d + "%)";
+    var str = macro + ": " + g + "g (" + d.toFixed(2) + "%)";
     return str;
   }
 
