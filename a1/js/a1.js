@@ -142,7 +142,7 @@ var MacroPlotLib = function() {
       .attr("width", width)
       .attr("height", height/2)
       .append("g")
-      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 / 2 - 1) + ")");
+      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height/2 - cellSize * 7 / 2 - 1) + ")");
 
     //draw the legend
     var legend = bottomBox.append("g");
