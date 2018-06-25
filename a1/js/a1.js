@@ -173,7 +173,7 @@ var MacroPlotLib = function() {
       var i = diffs.indexOf(Math.max(carbDiff,fatDiff,proteinDiff,macroThreshold));
       macroData[key].fillColor = d3.hcl(hues[i]);
       //calculate radius
-      macroData[key].r = rad(Math.max(Math.min(calUpperBound,calTotal),calLowerBound));
+      macroData[key].r = rad(Math.max(Math.min(calUpperBound,macroData[key].calorie_c),calLowerBound));
     });
   }//calculateGoalUpdate
 
