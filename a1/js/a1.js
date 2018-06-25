@@ -149,8 +149,9 @@ var MacroPlotLib = function() {
             return macro;
           })
         .object(json);
+      console.log(a);
     }); //d3.json
-    console.log(a);
+
   }; //readData
 
   var updateGoals = function() {
