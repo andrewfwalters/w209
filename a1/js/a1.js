@@ -19,7 +19,7 @@ var MacroPlotLib = function() {
 
   //layout constants
   var width = 960,
-      height = 146,
+      height = 158,
       cellSize = 17;
 
   //svg member variables
@@ -164,13 +164,17 @@ var MacroPlotLib = function() {
       .attr("fill","aliceblue")
       .attr("transform", "translate(0," + (cellSize*1) + ")");
 
-    detailBox.append("text")
-      .attr("x", cellSize*7)
-      .attr("y", cellSize*0.7)
-      .attr("font-family", "sans-serif")
-      .attr("font-size", 10)
-      .style("text-anchor", "middle")
-      .text("Test Text!")
+    detailBox.selectAll("text")
+      .data(d3.range(0, 5))
+      .enter()
+      .append("text")
+        .attr("x", cellSize*7)
+        .attr("y", cellSize*0.7)
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .style("text-anchor", "middle")
+        .text("Test Text!")
+        .attr("transform", d => "translate(0," + (cellSize*d) + ")");
 
 /*copied stuff
     var hoverGroup = chart.append("g").style("visibility","hidden");
