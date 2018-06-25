@@ -177,10 +177,16 @@ var MacroPlotLib = function() {
   var drawGoalUpdate = function() {
     dateGroups.selectAll("circle")
       .filter(function(d) { return d in macroData; })
-        .attr("fill", d => macroData[d].fillColor)
-        .attr("r",d => macroData[d].r);
+        .transition()
+          .duration(500)
+          .attr("fill", d => macroData[d].fillColor)
+          .attr("r",d => macroData[d].r);
   }//drawGoalUpdate
 
+  /* macroObjectUtility
+   * takes macro measurements in grams
+   * returns object with decimal ratios of each macro, total calories
+   */
   var macroObjectUtility = function(carb_g,fat_g,protein_g) {
     var ret = {
       "carbs_g":carb_g,
