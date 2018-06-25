@@ -31,8 +31,9 @@ var MacroPlotLib = function() {
   //data member variables
   var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
   var macroGoals; //{"carbs_g","fat_g","protein_g","carbs_d","fat_d","protein_d","calorie_c"}
-  var monthStats; //{YYYY-MM: {carb_diff_g,fat_diff_g,protein_diff_g,calorie_diff_g}}
-  var dayStats;
+  var monthStats; //{YYYY-MM: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
+  var dayStats; //{"Monday": {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
+  var detailObj; //holds data for currently selected item in the detail box
 
   //visual constants
   var hues = ["royalblue","forestgreen","firebrick","gray"];
@@ -41,9 +42,11 @@ var MacroPlotLib = function() {
 
   var drawMacroPlot = function(url) {
     //draw an svg for each year
-    svg = d3.select("body")
+    var startYear = 2017;
+    var endYear = 2018;
+    svg = d3.select("#calendarContainer")
       .selectAll("svg")
-      .data(d3.range(2017, 2019))
+      .data(d3.range(startYear, endYear+1))
       .enter().append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -133,7 +136,14 @@ var MacroPlotLib = function() {
     //legend
 
     //detail box
-    var detailObj;
+    var legend = d3.select("#legendContainer")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+
+
 
 
     //read in data and populate calendar
