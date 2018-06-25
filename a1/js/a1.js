@@ -164,6 +164,14 @@ var MacroPlotLib = function() {
       .attr("fill","aliceblue")
       .attr("transform", "translate(0," + (cellSize*1) + ")");
 
+    detailBox.append("text")
+      .attr("width", cellSize*7)
+      .attr("height", cellSize*0.5)
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+      .style("text-anchor", "middle")
+      .text("Test Text!")
+
 /*copied stuff
     var hoverGroup = chart.append("g").style("visibility","hidden");
 
