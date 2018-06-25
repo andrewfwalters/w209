@@ -275,7 +275,7 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
   }//macroObjectUtility
 
   var clickDateEvent = function(d,i) {
-    if(detailBox.attr("visibility")==="visible" && detailBox.select("#text0").text()===d) {
+    if(detailBox.attr("visibility")=="visible" && detailBox.select("#text0").text()==d) {
       detailBox.style("visibility","hidden");
     }
     else if(d in macroData) {
@@ -294,7 +294,7 @@ var hoverText = hoverGroup.append("text").attr("x",14).attr("y",15);*/
   }//clickDateEvent
 
   var detailString = function(macro,g,d) {
-    var str = macro + ": " + g + "g (" + d.toFixed(2) + "%)";
+    var str = macro + ": " + g + "g (" + (100*d).toFixed(2) + "%)";
     return str;
   }
 
