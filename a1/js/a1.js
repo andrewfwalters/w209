@@ -144,10 +144,12 @@ var MacroPlotLib = function() {
      */
      //add an svg to hold the goal sliders
     var slideWidth = cellSize*8;
+    var slideHeight = cellSize*5+10;
+    var margin = {right: 50, left: 50},
     var topBox = d3.select("#goalContainer")
       .append("svg")
       .attr("width", width)
-      .attr("height", cellSize*5+10)
+      .attr("height", slideHeight)
     var topGroup = topBox.append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + ",0)");
 
@@ -164,7 +166,7 @@ var MacroPlotLib = function() {
 
     var slider = sliderGroups.append("g")
       .attr("class", "slider")
-      .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+      .attr("transform", "translate(" + margin.left + "," + slideHeight / 2 + ")");
 
     slider.append("line")
         .attr("class", "track")
