@@ -153,7 +153,8 @@ var MacroPlotLib = function() {
     var topGroup = topBox.append("g")
       .attr("transform", "translate(" + margin + ",0)");
 
-    var sliderNames = ["carb","fat","protein"];
+    //var sliderNames = ["carb","fat","protein"];
+    var sliderNames = ["carb"];
     var sliderGroups = topGroup.selectAll("g")
       .data(sliderNames)
       .enter()
