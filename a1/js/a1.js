@@ -148,7 +148,7 @@ var MacroPlotLib = function() {
       .append("svg")
       .attr("width", width)
       .attr("height", cellSize*5+10)
-    var topGroup.append("g")
+    var topGroup = topBox.append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + ",0)");
 
     var sliderNames = ["carb","fat","protein"];
