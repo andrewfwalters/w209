@@ -145,7 +145,7 @@ var MacroPlotLib = function() {
      //add an svg to hold the goal sliders
     var slideWidth = cellSize*8;
     var slideHeight = cellSize*5+10;
-    var margin = {right: 50, left: 50},
+    var margin = {right: 50, left: 50};
     var topBox = d3.select("#goalContainer")
       .append("svg")
       .attr("width", width)
