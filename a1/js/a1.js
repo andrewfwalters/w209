@@ -40,6 +40,10 @@ var MacroPlotLib = function() {
   calsDisplayMax = 0.2;
 
   var drawMacroPlot = function(url) {
+
+    /* Calendar Element
+     * each calendar is created in this section
+     */
     //draw an svg for each year
     var startYear = 2017;
     var endYear = 2018;
@@ -135,20 +139,74 @@ var MacroPlotLib = function() {
           + "H" + (w0 + 1) * cellSize + "Z";
     }
 
-    //add an svg to hold the goal sliders
+    /* Goal Sliders
+     * sliders at the top the set macro goals
+     */
+     //add an svg to hold the goal sliders
+    var slideWidth = cellSize*8;
     var topBox = d3.select("#goalContainer")
       .append("svg")
       .attr("width", width)
       .attr("height", cellSize*5+10)
-      .append("g")
+    var topGroup.append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + ",0)");
 
     var sliderNames = ["carb","fat","protein"];
-    var sliderGroups = topBox.selectAll("g")
+    var sliderGroups = topGroup.selectAll("g")
       .data(sliderNames)
       .enter()
       .append("g");
 
+    var macroScale = d3.scaleLinear()
+      .domain([0, 1])
+      .range([0, slideWidth])
+      .clamp(true);
+
+    var slider = sliderGroups.append("g")
+      .attr("class", "slider")
+      .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+
+    slider.append("line")
+        .attr("class", "track")
+        .attr("x1", macroScale.range()[0])
+        .attr("x2", macroScale.range()[1])
+      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-inset")
+      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-overlay")
+        .call(d3.drag()
+            .on("start.interrupt", function() { slider.interrupt(); })
+            .on("start drag", function() { hue(x.invert(d3.event.x)); }));
+
+    slider.insert("g", ".track-overlay")
+        .attr("class", "ticks")
+        .attr("transform", "translate(0," + 18 + ")")
+      .selectAll("text")
+      .data(x.ticks(10))
+      .enter().append("text")
+        .attr("x", x)
+        .attr("text-anchor", "middle")
+        .text(function(d) { return d + "°"; });
+
+    var handle = slider.insert("circle", ".track-overlay")
+        .attr("class", "handle")
+        .attr("r", 9);
+
+    slider.transition() // Gratuitous intro!
+        .duration(750)
+        .tween("hue", function() {
+          var i = d3.interpolate(0, 70);
+          return function(t) { hue(i(t)); };
+        });
+
+    function hue(h) {
+      handle.attr("cx", macroScale(h));
+      topBox.style("background-color", d3.hsl(h, 0.8, 0.8));
+    }
+
+    /* Legend and Detail Box
+     * the bottom part of the vizualization
+     */
     //add an svg to hold legend and detail box
     var bottomBox = d3.select("#legendContainer")
       .append("svg")
