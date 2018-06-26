@@ -186,7 +186,7 @@ var MacroPlotLib = function() {
       .selectAll("text")
       .data(macroScale.ticks(10))
       .enter().append("text")
-        .attr("x", x)
+        .attr("x", macroScale)
         .attr("text-anchor", "middle")
         .text(function(d) { return d + "°"; });
 
