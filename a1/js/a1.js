@@ -239,6 +239,8 @@ var MacroPlotLib = function() {
     }
 
     goalSlide(sliderGroups.filter(d => d==="carb"),default_carb_g);
+    goalSlide(sliderGroups.filter(d => d==="fat"),default_fat_g);
+    goalSlide(sliderGroups.filter(d => d==="protein"),default_protein_g);
 
     function goalSlideEnd(h) {
       var c = macroScale.invert(parseInt(
@@ -256,8 +258,7 @@ var MacroPlotLib = function() {
           .filter(".handle")
           .filter(".protein")
           .attr("cx")));
-      console.log(c + " f: " + f + " p: " + p);
-      updateGoals(c,default_fat_g,default_protein_g);
+      updateGoals(c,f,p);
     }
 
     /* Legend and Detail Box
@@ -331,10 +332,7 @@ var MacroPlotLib = function() {
 
   var updateGoals = function(c,f,p) {
     macroGoals = macroObjectUtility(c,f,p);
-    //console.log(macroData);
-    //console.log(macroGoals);
     calculateGoalUpdate();
-    //console.log(macroData);
     drawGoalUpdate();
   }
 
