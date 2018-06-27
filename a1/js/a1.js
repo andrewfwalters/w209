@@ -239,10 +239,19 @@ var MacroPlotLib = function() {
     }
 
     function goalSlideEnd(h) {
-      var newGoals = h.selectAll('circle').datum(function() {
-        return parseFloat(this.getAttribute('cx'));
-      });
-      console.log(newGoals);
+      var c = macroScale.invert(parseFloat(
+        d3.selectAll("circle")
+          .filter(".carb")
+          .attr("cx")));
+      var f = macroScale.invert(parseFloat(
+        d3.selectAll("circle")
+          .filter(".fat")
+          .attr("cx")));
+      var p = macroScale.invert(parseFloat(
+        d3.selectAll("circle")
+          .filter(".protein")
+          .attr("cx")));
+      console.log(c + " f: " + " p: " + p);
     }
 
     /* Legend and Detail Box
