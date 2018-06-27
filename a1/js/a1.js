@@ -241,14 +241,17 @@ var MacroPlotLib = function() {
     function goalSlideEnd(h) {
       var c = macroScale.invert(parseInt(
         d3.selectAll("circle")
+          .filter(".handle")
           .filter(".carb")
           .attr("cx")));
       var f = macroScale.invert(parseInt(
         d3.selectAll("circle")
+          .filter(".handle")
           .filter(".fat")
           .attr("cx")));
       var p = macroScale.invert(parseInt(
         d3.selectAll("circle")
+          .filter(".handle")
           .filter(".protein")
           .attr("cx")));
       console.log(c + " f: " + f + " p: " + p);
