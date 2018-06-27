@@ -143,15 +143,15 @@ var MacroPlotLib = function() {
      * sliders at the top the set macro goals
      */
      //add an svg to hold the goal sliders
-    var slideWidth = cellSize*8;
+    var slideWidth = cellSize*15;
     var slideHeight = cellSize*5+10;
-    var margin = (width - cellSize * 53) / 2;
+    var xMargin = (width - cellSize * 53) / 2;
     var topBox = d3.select("#goalContainer")
       .append("svg")
       .attr("width", width)
       .attr("height", slideHeight)
     var topGroup = topBox.append("g")
-      .attr("transform", "translate(" + margin + ",0)");
+      .attr("transform", "translate(" + xMargin + ",0)");
 
     //var sliderNames = ["carb","fat","protein"];
     var sliderNames = ["carb"];
@@ -161,14 +161,14 @@ var MacroPlotLib = function() {
       .append("g");
 
     var macroScale = d3.scaleLinear()
-      .domain([0, 1])
+      .domain([0, 300])
       .range([0, slideWidth])
       .clamp(true);
 
     var slider = sliderGroups.append("g")
       .attr("class", "slider")
       .attr("transform",function(d,i) {
-        var str = "translate(" + margin+13*i*cellSize + "," + slideHeight / 2 + ")";
+        var str = "translate(" + 13*i*cellSize + "," + slideHeight / 2 + ")";
         return str;
       });
 
@@ -192,7 +192,7 @@ var MacroPlotLib = function() {
       .enter().append("text")
         .attr("x", macroScale)
         .attr("text-anchor", "middle")
-        .text(function(d) { return d + "°"; });
+        .text(function(d) { return d + "g"; });
 
     var handle = slider.insert("circle", ".track-overlay")
         .attr("class", "handle")
