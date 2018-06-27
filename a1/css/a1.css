@@ -33,19 +33,19 @@
   stroke-width: 1.25px;
 }
 
-text.carb {
+.goalText .carb {
   fill: royalblue;
 }
 
-text.fat {
+.goalText .fat {
   fill: forestgreen;
 }
 
-text.protein {
+.goalText .protein {
   fill: firebrick;
 }
 
-text.goalText {
+.goalText {
   font-family: sans-serif;
   font-size: 10;
 }
