@@ -65,7 +65,7 @@ var MacroPlotLib = function() {
         .text(d => d);
 
     //draw the days of the week to the left of each year
-    weekDays = ['S','M','T','W','T','F','S']
+    var weekDays = ['S','M','T','W','T','F','S'];
     svg.append("g")
         .attr("transform", "translate(" + (-cellSize) + "," + 0 + ")")
         .selectAll("text")
@@ -77,6 +77,8 @@ var MacroPlotLib = function() {
         .attr("font-size", 10)
         .attr("text-anchor", "middle")
         .text(d => d);
+
+    var months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
 
     //make a group for each day of each year
     dateGroups = svg.append("g")
@@ -172,12 +174,6 @@ var MacroPlotLib = function() {
         return str;
       });
 
-    var goalText = slider.append("text")
-      .attr("class", "goalText")
-      .attr("transform","translate(" + (15/2)*cellSize + "," + -slideHeight*0.2 + ")")
-      .text(function() {return d3.select(this.parentNode).datum()});
-
-
     slider.append("line")
         .attr("class", "track")
         .attr("x1", macroScale.range()[0])
@@ -207,6 +203,15 @@ var MacroPlotLib = function() {
     var handle = slider.insert("circle", ".track-overlay")
         .attr("class", "handle")
         .attr("r", 9);
+
+    var goalText = slider.append("text")
+      .attr("class", "goalText")
+      .attr("transform","translate(" + 4*cellSize + "," + -slideHeight*0.2 + ")")
+      .text(function() {
+        var macroType = d3.select(this.parentNode).datum();
+        var macroAmount = handle.attr("cx");
+        return macroAmount + "g of " + macroType;
+      });
 
     slider.transition() // Gratuitous intro!
         .duration(750)
