@@ -222,7 +222,7 @@ var MacroPlotLib = function() {
 
     function goalSlide(g) {
       handle.attr("cx", macroScale(g));
-      goalText = .text(function() {
+      goalText.text(function() {
           var macroType = d3.select(this.parentNode).datum();
           var macroAmount = handle.attr("cx");
           return macroAmount + "g of " + macroType;
