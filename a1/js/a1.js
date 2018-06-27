@@ -106,6 +106,7 @@ var MacroPlotLib = function() {
         .attr("x", rectX)
         .attr("y", rectY)
         .attr("fill","white")
+        .attr("cursor", "crosshair");
         .datum(d3.timeFormat("%Y-%m-%d"))
         .on("mousedown",clickDateEvent);
 
@@ -118,6 +119,7 @@ var MacroPlotLib = function() {
         .attr("cy", circY)
         .attr("fill", "none")
         .attr("stroke", "none")
+        .attr("cursor", "crosshair");
         .datum(d3.timeFormat("%Y-%m-%d"))
         .on("mousedown",clickDateEvent);
 
@@ -188,6 +190,9 @@ var MacroPlotLib = function() {
               var selectMacroGroup = d3.select(this.parentNode);
               var macroGrams = macroScale.invert(d3.event.x);
               goalSlide(selectMacroGroup,macroGrams);
+            })
+            .on("end", function() {
+              return null;
             }));
         /*.call(d3.drag()
           //.on("start", dragstarted)
@@ -359,7 +364,10 @@ var MacroPlotLib = function() {
   }//macroObjectUtility
 
   var clickDateEvent = function(d,i) {
+    h = d3.select(this.parentNode);
+    thisRect = h.selectAll("rect");
     if(detailObj.isSet===true && detailObj.objKey===d) {
+      thisRect.attr("fill","white");
       detailBox.style("visibility","hidden");
       detailObj.isSet = false;
     }
@@ -374,6 +382,7 @@ var MacroPlotLib = function() {
         .text(detailString("Protein",macroData[d].protein_g,macroData[d].protein_d));
       detailBox.select("#text4")
         .text("Calories: " + macroData[d].calorie_c);
+      thisRect.attr("fill","grey");
       detailBox.style("visibility","visible");
       detailObj.objKey = d;
       detailObj.isSet = true;
