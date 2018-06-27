@@ -182,7 +182,7 @@ var MacroPlotLib = function() {
         .attr("class", "track-overlay")
         .call(d3.drag()
             .on("start.interrupt", function() { slider.interrupt(); })
-            .on("start drag", function() { hue(x.invert(d3.event.x)); }));
+            .on("start drag", function() { hue(macroScale.invert(d3.event.x)); }));
 
     slider.insert("g", ".track-overlay")
         .attr("class", "ticks")
