@@ -186,8 +186,8 @@ var MacroPlotLib = function() {
             .on("start.interrupt", function() { slider.interrupt(); })
             .on("start drag", function() {
               var selectMacroGroup = d3.select(this.parentNode);
-              var handleX = macroScale.invert(d3.event.x);
-              goalSlide(selectHandle,handleX,macroType);
+              var macroGrams = macroScale.invert(d3.event.x);
+              goalSlide(selectMacroGroup,macroGrams);
             }));
         /*.call(d3.drag()
           //.on("start", dragstarted)
