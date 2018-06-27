@@ -154,7 +154,7 @@ var MacroPlotLib = function() {
       .attr("transform", "translate(" + xMargin + ",0)");
 
     //var sliderNames = ["carb","fat","protein"];
-    var sliderNames = ["carb"];
+    var sliderNames = ["carb","fat"];
     var sliderGroups = topGroup.selectAll("g")
       .data(sliderNames)
       .enter()
