@@ -38,6 +38,9 @@ var MacroPlotLib = function() {
   var hues = ["royalblue","forestgreen","firebrick","gray"];
   var macroThreshold = 0.04;
   calsDisplayMax = 0.2;
+  default_carb_g = 200;
+  default_fat_g = 66;
+  default_protein_g = 150;
 
   var drawMacroPlot = function(url) {
 
@@ -192,7 +195,7 @@ var MacroPlotLib = function() {
               goalSlide(selectMacroGroup,macroGrams);
             })
             .on("end", function() {
-              return null;
+              goalSlideEnd(d3.select(this.parentNode));
             }));
         /*.call(d3.drag()
           //.on("start", dragstarted)
@@ -236,7 +239,9 @@ var MacroPlotLib = function() {
     }
 
     function goalSlideEnd(g) {
-
+      newGoals = parseFloat(h.selectAll("circle")
+        .attr("cx"));
+      console.log(newGoals);
     }
 
     /* Legend and Detail Box
@@ -303,13 +308,13 @@ var MacroPlotLib = function() {
             return macro;
           })
         .object(json);
-      updateGoals();
+      updateGoals(default_carb_g,default_fat_g,default_protein_g);
     }); //d3.json
 
   }; //readData
 
-  var updateGoals = function() {
-    macroGoals = macroObjectUtility(200,66,150);
+  var updateGoals = function(c,f,p) {
+    macroGoals = macroObjectUtility(c,f,p);
     calculateGoalUpdate();
     drawGoalUpdate();
   }
