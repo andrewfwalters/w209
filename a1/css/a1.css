@@ -33,15 +33,15 @@
   stroke-width: 1.25px;
 }
 
-.goalText .carb {
+.goalText.carb {
   fill: royalblue;
 }
 
-.goalText .fat {
+.goalText.fat {
   fill: forestgreen;
 }
 
-.goalText .protein {
+.goalText.protein {
   fill: firebrick;
 }
 
