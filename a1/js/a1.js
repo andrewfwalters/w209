@@ -205,8 +205,7 @@ var MacroPlotLib = function() {
         .text(function(d) { return d + "g"; });
 
     var handle = slider.insert("circle", ".track-overlay")
-        .attr("class", "handle")
-        .attr("class", function() {d3.select(this.parentNode).datum(); })
+        .attr("class", function() {return "handle " + d3.select(this.parentNode).datum(); })
         .attr("r", 9);
 
     var goalText = slider.append("text")
