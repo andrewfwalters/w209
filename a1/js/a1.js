@@ -159,8 +159,10 @@ var MacroPlotLib = function() {
     topGroup = topBox.append("g")
       .attr("transform", "translate(" + xMargin + ",0)");
 
-    topBox.append("text")
+    topGroup.append("text")
       .attr("text-anchor", "left")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 18)
       .attr("transform","translate(0," + slideHeight*0.2 + ")")
       .text("Set Macronutrient Goals:");
 
