@@ -225,7 +225,7 @@ var MacroPlotLib = function() {
       goalText.text(function() {
           var macroType = d3.select(this.parentNode).datum();
           var macroAmount = handle.attr("cx");
-          return macroAmount.toFixed(0) + "g of " + macroType;
+          return parseFloat(macroAmount).toFixed(0) + "g of " + macroType;
         });
       //topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
     }
