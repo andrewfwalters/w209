@@ -188,7 +188,7 @@ var MacroPlotLib = function() {
         .attr("class", "ticks")
         .attr("transform", "translate(0," + 18 + ")")
       .selectAll("text")
-      .data(macroScale.ticks(10))
+      .data(macroScale.ticks(5))
       .enter().append("text")
         .attr("x", macroScale)
         .attr("text-anchor", "middle")
