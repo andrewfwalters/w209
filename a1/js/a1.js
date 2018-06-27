@@ -172,6 +172,12 @@ var MacroPlotLib = function() {
         return str;
       });
 
+    var goalText = slider.append("text")
+      .attr("class", "goalText")
+      .attr("transform","translate(" + (15/2)*cellSize + "," + -slideHeight*0.2 + ")")
+      .text(function() {return d3.select(this.parentNode).datum()});
+
+
     slider.append("line")
         .attr("class", "track")
         .attr("x1", macroScale.range()[0])
@@ -183,6 +189,10 @@ var MacroPlotLib = function() {
         .call(d3.drag()
             .on("start.interrupt", function() { slider.interrupt(); })
             .on("start drag", function() { hue(macroScale.invert(d3.event.x)); }));
+        /*.call(d3.drag()
+          //.on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));*/
 
     slider.insert("g", ".track-overlay")
         .attr("class", "ticks")
