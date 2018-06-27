@@ -32,3 +32,15 @@
   stroke-opacity: 0.5;
   stroke-width: 1.25px;
 }
+
+text.carb {
+  fill: royalblue;
+}
+
+text.fat {
+  fill: forestgreen;
+}
+
+text.protein {
+  fill: firebrick;
+}

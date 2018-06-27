@@ -213,12 +213,16 @@ var MacroPlotLib = function() {
     var goalText = slider.append("text")
       .attr("class", "goalText")
       .attr("text-anchor", "middle")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
       .attr("transform","translate(" + 4*cellSize + "," + -slideHeight*0.2 + ")");
 
     var goalText = topGroup.append("text")
       .attr("class", "goalText")
       .attr("text-anchor", "middle")
-      .attr("transform","translate(" + ((2*cellSize)+(15*3*cellSize)) + "," + slideHeight*0.5 + ")")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+      .attr("transform","translate(" + ((4*cellSize)+(15*3*cellSize)) + "," + slideHeight*0.5 + ")")
       .text("2000 calories");
 
     function goalSlide(h,g) {
