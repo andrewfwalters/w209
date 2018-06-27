@@ -326,8 +326,10 @@ var MacroPlotLib = function() {
 
   var updateGoals = function(c,f,p) {
     macroGoals = macroObjectUtility(c,f,p);
-    calculateGoalUpdate();
-    drawGoalUpdate();
+    console.log(macroData);
+    console.log(macroGoals);
+    //calculateGoalUpdate();
+    //drawGoalUpdate();
   }
 
   var calculateGoalUpdate = function() {
