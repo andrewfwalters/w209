@@ -353,7 +353,7 @@ var MacroPlotLib = function() {
   }//calculateGoalUpdate
 
   var drawGoalUpdate = function() {
-    topGroup.select("calorieTotal")
+    d3.select("#calorieTotal")
       .text(macroGoals.calorie_c + " calories");
     dateGroups.selectAll("circle")
       .filter(function(d) { return d in macroData; })
