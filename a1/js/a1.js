@@ -206,12 +206,7 @@ var MacroPlotLib = function() {
 
     var goalText = slider.append("text")
       .attr("class", "goalText")
-      .attr("transform","translate(" + 4*cellSize + "," + -slideHeight*0.2 + ")")
-      .text(function() {
-        var macroType = d3.select(this.parentNode).datum();
-        var macroAmount = handle.attr("cx");
-        return macroAmount + "g of " + macroType;
-      });
+      .attr("transform","translate(" + 4*cellSize + "," + -slideHeight*0.2 + ")");
 
     /*slider.transition() // Gratuitous intro!
         .duration(750)
@@ -224,10 +219,13 @@ var MacroPlotLib = function() {
       handle.attr("cx", macroScale(g));
       goalText.text(function() {
           var macroType = d3.select(this.parentNode).datum();
-          var macroAmount = macroScale.invert(handle.attr("cx"));
-          return parseFloat(macroAmount).toFixed(0) + "g of " + macroType;
+          return g.toFixed(0) + "g of " + macroType;
         });
       //topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
+    }
+
+    function goalSlideEnd(g) {
+
     }
 
     /* Legend and Detail Box
