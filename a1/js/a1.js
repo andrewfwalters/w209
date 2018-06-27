@@ -239,15 +239,15 @@ var MacroPlotLib = function() {
     }
 
     function goalSlideEnd(h) {
-      var c = macroScale.invert(parseFloat(
+      var c = macroScale.invert(parseInt(
         d3.selectAll("circle")
           .filter(".carb")
           .attr("cx")));
-      var f = macroScale.invert(parseFloat(
+      var f = macroScale.invert(parseInt(
         d3.selectAll("circle")
           .filter(".fat")
           .attr("cx")));
-      var p = macroScale.invert(parseFloat(
+      var p = macroScale.invert(parseInt(
         d3.selectAll("circle")
           .filter(".protein")
           .attr("cx")));
