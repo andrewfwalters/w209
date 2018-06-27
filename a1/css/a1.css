@@ -49,3 +49,11 @@
   font-family: sans-serif;
   font-size: 10;
 }
+
+p {
+  font-size: 12;
+}
+
+h1 h2 p {
+  font-family: sans-serif;
+}
