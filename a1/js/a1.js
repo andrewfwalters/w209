@@ -159,6 +159,11 @@ var MacroPlotLib = function() {
     topGroup = topBox.append("g")
       .attr("transform", "translate(" + xMargin + ",0)");
 
+    topBox.append("text")
+      .attr("text-anchor", "left")
+      .attr("transform","translate(0," + slideHeight*0.2 + ")")
+      .text("Set Macronutrient Goals:");
+
     //var sliderNames = ["carb","fat","protein"];
     var sliderNames = ["carb","fat","protein"];
     var sliderGroups = topGroup.selectAll("g")

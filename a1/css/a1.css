@@ -51,17 +51,17 @@
 }
 
 p {
-  width: 960px;
+  max-width: 960px;
   font-family: sans-serif;
   font-size: 12;
 }
 
 h1 {
-  width: 960px;
+  max-width: 960px;
   font-family: sans-serif;
 }
 
 h2 {
-  width: 960px;
+  max-width: 960px;
   font-family: sans-serif;
 }
