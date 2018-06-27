@@ -143,7 +143,7 @@ var MacroPlotLib = function() {
      * sliders at the top the set macro goals
      */
      //add an svg to hold the goal sliders
-    var slideWidth = cellSize*10;
+    var slideWidth = cellSize*12;
     var slideHeight = cellSize*5+10;
     var xMargin = (width - cellSize * 53) / 2;
     var topBox = d3.select("#goalContainer")
@@ -154,7 +154,7 @@ var MacroPlotLib = function() {
       .attr("transform", "translate(" + xMargin + ",0)");
 
     //var sliderNames = ["carb","fat","protein"];
-    var sliderNames = ["carb","fat"];
+    var sliderNames = ["carb","fat","protein"];
     var sliderGroups = topGroup.selectAll("g")
       .data(sliderNames)
       .enter()
@@ -168,7 +168,7 @@ var MacroPlotLib = function() {
     var slider = sliderGroups.append("g")
       .attr("class", "slider")
       .attr("transform",function(d,i) {
-        var str = "translate(" + 12*i*cellSize + "," + slideHeight / 2 + ")";
+        var str = "translate(" + 15*i*cellSize + "," + slideHeight / 2 + ")";
         return str;
       });
 
