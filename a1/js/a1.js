@@ -354,7 +354,7 @@ var MacroPlotLib = function() {
 
   var drawGoalUpdate = function() {
     d3.select("#calorieTotal")
-      .text(macroGoals.calorie_c + " calories");
+      .text(macroGoals.calorie_c.toFixed(0) + " calories");
     dateGroups.selectAll("circle")
       .filter(function(d) { return d in macroData; })
         .transition()
