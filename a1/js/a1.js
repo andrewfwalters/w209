@@ -335,7 +335,8 @@ var MacroPlotLib = function() {
     var calUpperBound = macroGoals.calorie_c+macroGoals.calorie_c*calsDisplayMax;
     var rad = d3.scaleLinear()
       .domain([calLowerBound,calUpperBound])
-      .range([1, cellSize/2-1]);
+      .range([1, cellSize/2-1])
+      .clamp(true);
 
     Object.keys(macroData).map(function(key, index) {
       //calculate fill color
