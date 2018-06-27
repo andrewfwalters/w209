@@ -251,7 +251,8 @@ var MacroPlotLib = function() {
         d3.selectAll("circle")
           .filter(".protein")
           .attr("cx")));
-      console.log(c + " f: " + " p: " + p);
+      console.log(c + " f: " + f + " p: " + p);
+      updateGoals(c,f,p);
     }
 
     /* Legend and Detail Box
