@@ -143,7 +143,7 @@ var MacroPlotLib = function() {
      * sliders at the top the set macro goals
      */
      //add an svg to hold the goal sliders
-    var slideWidth = cellSize*15;
+    var slideWidth = cellSize*10;
     var slideHeight = cellSize*5+10;
     var xMargin = (width - cellSize * 53) / 2;
     var topBox = d3.select("#goalContainer")
@@ -168,7 +168,7 @@ var MacroPlotLib = function() {
     var slider = sliderGroups.append("g")
       .attr("class", "slider")
       .attr("transform",function(d,i) {
-        var str = "translate(" + 13*i*cellSize + "," + slideHeight / 2 + ")";
+        var str = "translate(" + 12*i*cellSize + "," + slideHeight / 2 + ")";
         return str;
       });
 
