@@ -24,6 +24,7 @@ var MacroPlotLib = function() {
   var circ; //array of circles for each day in each element of svg
   var dateGroups; //group holding the circ and rect elements
   var detailBox;
+  var topGroup;
 
   //data member variables
   var macroData; //{YYYY-MM-DD: {carb_g,fat_g,protein_g,carb_d,fat_d,protein_d,calorie_c}}
@@ -155,7 +156,7 @@ var MacroPlotLib = function() {
       .append("svg")
       .attr("width", width)
       .attr("height", slideHeight)
-    var topGroup = topBox.append("g")
+    topGroup = topBox.append("g")
       .attr("transform", "translate(" + xMargin + ",0)");
 
     //var sliderNames = ["carb","fat","protein"];
@@ -217,6 +218,7 @@ var MacroPlotLib = function() {
 
     var goalText = topGroup.append("text")
       .attr("class", "goalText")
+      .attr("id", "calorieTotal")
       .attr("text-anchor", "middle")
       .attr("transform","translate(" + ((4*cellSize)+(15*3*cellSize)) + "," + slideHeight*0.5 + ")")
       .text("2000 calories");
@@ -351,6 +353,8 @@ var MacroPlotLib = function() {
   }//calculateGoalUpdate
 
   var drawGoalUpdate = function() {
+    topGroup.select("calorieTotal")
+      .text(macroGoals.calorie_c + " calories");
     dateGroups.selectAll("circle")
       .filter(function(d) { return d in macroData; })
         .transition()
