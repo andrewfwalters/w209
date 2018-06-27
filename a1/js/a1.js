@@ -368,6 +368,7 @@ var MacroPlotLib = function() {
       .selectAll("rect");
     var currRect = dateGroups.filter(function(d){return d==date;})
       .selectAll("rect");
+    console.log(date);
     console.log(currRect);
     console.log(prevRect);
     if(detailObj.isSet===true && detailObj.objKey===date) {
