@@ -222,7 +222,12 @@ var MacroPlotLib = function() {
 
     function goalSlide(g) {
       handle.attr("cx", macroScale(g));
-      topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
+      goalText = .text(function() {
+          var macroType = d3.select(this.parentNode).datum();
+          var macroAmount = handle.attr("cx");
+          return macroAmount + "g of " + macroType;
+        });
+      //topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
     }
 
     /* Legend and Detail Box
