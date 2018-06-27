@@ -168,7 +168,7 @@ var MacroPlotLib = function() {
     var slider = sliderGroups.append("g")
       .attr("class", "slider")
       .attr("transform",function(d,i) {
-        var str = "translate(" + 15*i*cellSize + "," + (slideHeight - slideHeight*0.2) + ")";
+        var str = "translate(" + 15*i*cellSize + "," + slideHeight*0.8 + ")";
         return str;
       });
 
