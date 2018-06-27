@@ -211,17 +211,15 @@ var MacroPlotLib = function() {
         .attr("r", 9);
 
     var goalText = slider.append("text")
-      .attr("class", "goalText")
+      .attr("class", function() {return "goalText " + d3.select(this.parentNode).datum(); })
+      //.attr("class", "goalText")
       .attr("text-anchor", "middle")
-      .attr("font-family", "sans-serif")
-      .attr("font-size", 10)
       .attr("transform","translate(" + 4*cellSize + "," + -slideHeight*0.2 + ")");
 
     var goalText = topGroup.append("text")
-      .attr("class", "goalText")
+      .attr("class", function() {return "goalText " + d3.select(this.parentNode).datum(); })
+      //.attr("class", "goalText")
       .attr("text-anchor", "middle")
-      .attr("font-family", "sans-serif")
-      .attr("font-size", 10)
       .attr("transform","translate(" + ((4*cellSize)+(15*3*cellSize)) + "," + slideHeight*0.5 + ")")
       .text("2000 calories");
 

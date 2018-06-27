@@ -44,3 +44,8 @@ text.fat {
 text.protein {
   fill: firebrick;
 }
+
+text.goalText {
+  font-family: sans-serif;
+  font-size: 10;
+}
