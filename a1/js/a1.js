@@ -238,6 +238,8 @@ var MacroPlotLib = function() {
       //topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
     }
 
+    goalSlide(sliderGroups.filter(d => d==="carb"),default_carb_g);
+
     function goalSlideEnd(h) {
       var c = macroScale.invert(parseInt(
         d3.selectAll("circle")
