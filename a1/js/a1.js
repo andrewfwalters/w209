@@ -3,8 +3,6 @@
   * June 21, 2018
 **/
 
-//todo add a slider
-//todo add slider action
 //todo write prose and takeaways
 //todo scale svg
 
@@ -197,10 +195,6 @@ var MacroPlotLib = function() {
             .on("end", function() {
               goalSlideEnd(d3.select(this.parentNode.parentNode.parentNode));
             }));
-        /*.call(d3.drag()
-          //.on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended));*/
 
     slider.insert("g", ".track-overlay")
         .attr("class", "ticks")
@@ -218,14 +212,14 @@ var MacroPlotLib = function() {
 
     var goalText = slider.append("text")
       .attr("class", "goalText")
+      .attr("text-anchor", "middle")
       .attr("transform","translate(" + 4*cellSize + "," + -slideHeight*0.2 + ")");
 
-    /*slider.transition() // Gratuitous intro!
-        .duration(750)
-        .tween("hue", function() {
-          var i = d3.interpolate(0, 70);
-          return function(t) { goalSlide(i(t)); };
-        });*/
+    var goalText = topGroup.append("text")
+      .attr("class", "goalText")
+      .attr("text-anchor", "middle")
+      .attr("transform","translate(" + 15*3*cellSize+4*cellSize + "," + slideHeight*0.5 + ")")
+      .text("2000 calories");
 
     function goalSlide(h,g) {
       h.selectAll("circle")
@@ -235,7 +229,6 @@ var MacroPlotLib = function() {
       .text(function() {
           return g.toFixed(0) + "g of " + h.datum();
         });
-      //topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
     }
 
     goalSlide(sliderGroups.filter(d => d==="carb"),default_carb_g);
