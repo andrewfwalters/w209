@@ -227,6 +227,7 @@ var MacroPlotLib = function() {
       .attr("class", "goalText")
       .attr("id", "calorieTotal")
       .attr("text-anchor", "middle")
+      .attr("color", "gray")
       .attr("transform","translate(" + ((4*cellSize)+(15*3*cellSize)) + "," + slideHeight*0.5 + ")")
       .text("2000 calories");
 
