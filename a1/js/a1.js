@@ -363,29 +363,36 @@ var MacroPlotLib = function() {
     return ret;
   }//macroObjectUtility
 
-  var clickDateEvent = function(d,i) {
-    h = d3.select(this.parentNode);
-    thisRect = h.selectAll("rect");
-    if(detailObj.isSet===true && detailObj.objKey===d) {
-      thisRect.attr("fill","white");
+  var clickDateEvent = function(date,i) {
+    var prevRect = dateGroups.filter(d => d===detailObj.objKey)
+      .selectAll("rect");
+    var currRect = dateGroups.filter(d => d===date);
+      .selectAll("rect");
+    if(detailObj.isSet===true && detailObj.objKey===date) {
+      prevRect.attr("fill","white");
       detailBox.style("visibility","hidden");
       detailObj.isSet = false;
     }
-    else if(d in macroData) {
+    else if(date in macroData) {
       detailBox.select("#text0")
-        .text(d);
+        .text(date);
       detailBox.select("#text1")
-        .text(detailString("Carbs",macroData[d].carb_g,macroData[d].carb_d));
+        .text(detailString("Carbs",macroData[date].carb_g,macroData[date].carb_d));
       detailBox.select("#text2")
-        .text(detailString("Fats",macroData[d].fat_g,macroData[d].fat_d));
+        .text(detailString("Fats",macroData[date].fat_g,macroData[date].fat_d));
       detailBox.select("#text3")
-        .text(detailString("Protein",macroData[d].protein_g,macroData[d].protein_d));
+        .text(detailString("Protein",macroData[date].protein_g,macroData[date].protein_d));
       detailBox.select("#text4")
-        .text("Calories: " + macroData[d].calorie_c);
-      thisRect.attr("fill","grey");
+        .text("Calories: " + macroData[date].calorie_c);
+      currRect.attr("fill","lightgrey");
       detailBox.style("visibility","visible");
-      detailObj.objKey = d;
+      detailObj.objKey = date;
       detailObj.isSet = true;
+    }
+    else {
+      prevRect.attr("fill","white");
+      detailBox.style("visibility","hidden");
+      detailObj.isSet = false;
     }
   }//clickDateEvent
 
