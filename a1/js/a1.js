@@ -238,7 +238,7 @@ var MacroPlotLib = function() {
       //topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
     }
 
-    function goalSlideEnd(g) {
+    function goalSlideEnd(h) {
       newGoals = parseFloat(h.selectAll("circle")
         .attr("cx"));
       console.log(newGoals);
