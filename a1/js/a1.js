@@ -329,7 +329,7 @@ var MacroPlotLib = function() {
     console.log(macroData);
     console.log(macroGoals);
     calculateGoalUpdate();
-    console.log(macroGoals);
+    console.log(macroData);
     //drawGoalUpdate();
   }
 
