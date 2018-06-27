@@ -195,7 +195,7 @@ var MacroPlotLib = function() {
               goalSlide(selectMacroGroup,macroGrams);
             })
             .on("end", function() {
-              goalSlideEnd(d3.select(this.parentNode));
+              goalSlideEnd(d3.select(this.parentNode.parentNode));
             }));
         /*.call(d3.drag()
           //.on("start", dragstarted)
