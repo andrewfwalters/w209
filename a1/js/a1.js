@@ -184,7 +184,11 @@ var MacroPlotLib = function() {
         .attr("class", "track-overlay")
         .call(d3.drag()
             .on("start.interrupt", function() { slider.interrupt(); })
-            .on("start drag", function() { goalSlide(macroScale.invert(d3.event.x)); }));
+            .on("start drag", function() {
+              var selectMacroGroup = d3.select(this.parentNode);
+              var handleX = macroScale.invert(d3.event.x);
+              goalSlide(selectHandle,handleX,macroType);
+            }));
         /*.call(d3.drag()
           //.on("start", dragstarted)
           .on("drag", dragged)
@@ -202,6 +206,7 @@ var MacroPlotLib = function() {
 
     var handle = slider.insert("circle", ".track-overlay")
         .attr("class", "handle")
+        .attr("class", function() {d3.select(this.parentNode).datum(); })
         .attr("r", 9);
 
     var goalText = slider.append("text")
@@ -215,11 +220,13 @@ var MacroPlotLib = function() {
           return function(t) { goalSlide(i(t)); };
         });*/
 
-    function goalSlide(g) {
-      handle.attr("cx", macroScale(g));
-      goalText.text(function() {
-          var macroType = d3.select(this.parentNode).datum();
-          return g.toFixed(0) + "g of " + macroType;
+    function goalSlide(h,g) {
+      h.selectAll("circle")
+        .attr("cx", macroScale(g));
+      h.selectAll("text")
+        .filter(".goalText")
+      .text(function() {
+          return g.toFixed(0) + "g of " + h.datum();
         });
       //topBox.style("background-color", d3.hsl(g, 0.8, 0.8));
     }
