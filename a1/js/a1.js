@@ -366,8 +366,8 @@ var MacroPlotLib = function() {
   var clickDateEvent = function(date,i) {
     var h = d3.select(this.parentNode);
     var thisRect = h.selectAll("rect");
+    rect.attr("fill","white");
     if(detailObj.isSet===true && detailObj.objKey===date) {
-      rect.attr("fill","white");
       detailBox.style("visibility","hidden");
       detailObj.isSet = false;
     }
