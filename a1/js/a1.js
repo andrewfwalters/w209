@@ -364,15 +364,10 @@ var MacroPlotLib = function() {
   }//macroObjectUtility
 
   var clickDateEvent = function(date,i) {
-    var prevRect = rect.filter(function(d){return d==detailObj.objKey;});
-      //.selectAll("rect");
-    var currRect = rect.filter(function(d){return d==date;});
-      //.selectAll("rect");
-    console.log(date);
-    console.log(currRect);
-    console.log(prevRect);
+    h = d3.select(this.parentNode);
+-   thisRect = h.selectAll("rect");
     if(detailObj.isSet===true && detailObj.objKey===date) {
-      prevRect.attr("fill","white");
+      rect.attr("fill","white");
       detailBox.style("visibility","hidden");
       detailObj.isSet = false;
     }
@@ -387,15 +382,10 @@ var MacroPlotLib = function() {
         .text(detailString("Protein",macroData[date].protein_g,macroData[date].protein_d));
       detailBox.select("#text4")
         .text("Calories: " + macroData[date].calorie_c);
-      currRect.attr("fill","lightgrey");
+      thisRect.attr("fill","lightgrey");
       detailBox.style("visibility","visible");
       detailObj.objKey = date;
       detailObj.isSet = true;
-    }
-    else {
-      prevRect.attr("fill","white");
-      detailBox.style("visibility","hidden");
-      detailObj.isSet = false;
     }
   }//clickDateEvent
 
