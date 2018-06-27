@@ -106,7 +106,7 @@ var MacroPlotLib = function() {
         .attr("x", rectX)
         .attr("y", rectY)
         .attr("fill","white")
-        .attr("cursor", "crosshair");
+        .attr("cursor", "crosshair")
         .datum(d3.timeFormat("%Y-%m-%d"))
         .on("mousedown",clickDateEvent);
 
@@ -119,7 +119,7 @@ var MacroPlotLib = function() {
         .attr("cy", circY)
         .attr("fill", "none")
         .attr("stroke", "none")
-        .attr("cursor", "crosshair");
+        .attr("cursor", "crosshair")
         .datum(d3.timeFormat("%Y-%m-%d"))
         .on("mousedown",clickDateEvent);
 
