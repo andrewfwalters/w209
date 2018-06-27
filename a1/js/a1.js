@@ -218,7 +218,7 @@ var MacroPlotLib = function() {
     var goalText = topGroup.append("text")
       .attr("class", "goalText")
       .attr("text-anchor", "middle")
-      .attr("transform","translate(" + 2*cellSize+15*3*cellSize + "," + slideHeight*0.5 + ")")
+      .attr("transform","translate(" + ((2*cellSize)+(15*3*cellSize)) + "," + slideHeight*0.5 + ")")
       .text("2000 calories");
 
     function goalSlide(h,g) {
