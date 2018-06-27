@@ -252,7 +252,7 @@ var MacroPlotLib = function() {
           .filter(".protein")
           .attr("cx")));
       console.log(c + " f: " + f + " p: " + p);
-      updateGoals(default_carb_g,default_fat_g,default_protein_g);
+      updateGoals(c,default_fat_g,default_protein_g);
     }
 
     /* Legend and Detail Box
