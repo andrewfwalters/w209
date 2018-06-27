@@ -364,11 +364,12 @@ var MacroPlotLib = function() {
   }//macroObjectUtility
 
   var clickDateEvent = function(date,i) {
-    var prevRect = dateGroups.filter(d => d==detailObj.objKey)
+    var prevRect = dateGroups.filter(function(d){return d==detailObj.objKey;})
       .selectAll("rect");
-    var currRect = dateGroups.filter(d => d==date)
+    var currRect = dateGroups.filter(function(d){return d==date;})
       .selectAll("rect");
     console.log(currRect);
+    console.log(prevRect);
     if(detailObj.isSet===true && detailObj.objKey===date) {
       prevRect.attr("fill","white");
       detailBox.style("visibility","hidden");
