@@ -239,8 +239,9 @@ var MacroPlotLib = function() {
     }
 
     function goalSlideEnd(h) {
-      newGoals = h.selectAll("circle")
-        .attr("cx");
+      var newGoals = h.selectAll('circle').datum(function() {
+        return parseFloat(this.getAttribute('cx'));
+      });
       console.log(newGoals);
     }
 
