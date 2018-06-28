@@ -307,6 +307,55 @@ var MacroPlotLib = function() {
         .text("text box")
         .attr("transform", d => "translate(0," + (cellSize*d) + ")");
 
+    var legendData1 = {
+      "low": {"r":1, "fill":grey, "text": "-20% from Calorie Goal"},
+      "med": {"r":cellSize/4, "fill":grey, "text": "Calorie Goal"},
+      "high": {"r":cellSize/2-1, "fill":grey, "text": "+20% from Calorie Goal"},
+    };
+    var legendData2 = {
+      "low": {"r":cellSize/4, "fill":hues[0], "text": "High Percentage of Carbs"},
+      "med": {"r":cellSize/4, "fill":hues[1], "text": "High Percentage of Fats"},
+      "high": {"r":cellSize/4, "fill":hues[2], "text": "High Percentage of Proteins"},
+    };
+
+    legendGroup1 = bottomBox.selectAll("rect")
+      .data(legendData1)
+      .enter()
+      .append(g)
+      .attr("transform", function(d,i) {
+        return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
+      };
+
+    legendGroup1.append("rect")
+      .attr("width", cellSize)
+      .attr("height", cellSize)
+      .attr("fill","white")
+      .attr("stroke", "#ccc");
+/*
+    rect = dateGroups.append("rect")
+        .attr("width", cellSize)
+        .attr("height", cellSize)
+        .attr("x", rectX)
+        .attr("y", rectY)
+        .attr("fill","white")
+        .attr("cursor", "crosshair")
+        .datum(d3.timeFormat("%Y-%m-%d"))
+        .on("mousedown",clickDateEvent);
+
+    //draw a circle on top of each rect
+    var circX = dateX(cellSize/2);
+    var circY = dateY(cellSize/2);
+    circ = dateGroups.append("circle")
+        .attr("r", 1)
+        .attr("cx", circX)
+        .attr("cy", circY)
+        .attr("fill", "none")
+        .attr("stroke", "none")
+        .attr("cursor", "crosshair")
+        .datum(d3.timeFormat("%Y-%m-%d"))
+        .on("mousedown",clickDateEvent);
+*/
+
     //read in data and populate calendar
     readData(url);
   };
