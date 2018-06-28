@@ -357,6 +357,7 @@ var MacroPlotLib = function() {
           });
     };
     drawLegendColumn(legendData1,0);
+    drawLegendColumn(legendData2,cellSize*15);
 
       /*legendGroup1.append("text")
         .attr("width", cellSize)
