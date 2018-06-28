@@ -321,7 +321,7 @@ var MacroPlotLib = function() {
     var drawLegendColumn = function(data,offset) {
       var legendGroup = bottomBox.append("g")
         .selectAll("g")
-        .data(legendData1)
+        .data(data)
         .enter()
         .append("g")
           .attr("class","Legend")
