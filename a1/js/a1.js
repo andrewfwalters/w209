@@ -445,7 +445,10 @@ var MacroPlotLib = function() {
     var h = d3.select(this.parentNode);
     var thisRect = h.selectAll("rect");
     rect.attr("fill","white");
-    //if(detailObj.isSet===true && detailObj.objKey===date) {
+    if(detailObj.isSet===true && detailObj.objKey===date) {
+      detailBox.style("visibility","hidden");
+      detailObj.isSet = false;
+    }
     if(date in macroData) {
       detailBox.select("#text0")
         .text(date);
