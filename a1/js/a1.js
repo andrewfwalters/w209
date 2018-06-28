@@ -329,7 +329,7 @@ var MacroPlotLib = function() {
     legendGroup1.append("rect")
       .attr("width", cellSize)
       .attr("height", cellSize)
-      .attr("fill","white")
+      .attr("fill","black")
       .attr("stroke", "#ccc");
 /*
     rect = dateGroups.append("rect")
