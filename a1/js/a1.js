@@ -356,7 +356,7 @@ var MacroPlotLib = function() {
             return d3.select(this.parentNode).datum().text;
           });
     };
-    drawLegendColumn(legendGroup1,0);
+    drawLegendColumn(legendData1,0);
 
       /*legendGroup1.append("text")
         .attr("width", cellSize)
