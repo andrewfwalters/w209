@@ -321,7 +321,7 @@ var MacroPlotLib = function() {
     legendGroup1 = bottomBox.selectAll("rect")
       .data(legendData1)
       .enter()
-      .append(g)
+      .append("g")
       .attr("transform", function(d,i) {
         return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
       });
