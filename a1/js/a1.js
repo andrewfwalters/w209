@@ -325,7 +325,8 @@ var MacroPlotLib = function() {
       .append("g")
         .attr("class","calorieLegend")
         .attr("transform", function(d,i) {
-          return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
+          console.log(i);
+          return "translate(" + 0 + "," + ((0.5*cellSize)+(cellSize*i*1.5)) + ")";
         });
 
     legendGroup1.append("rect")
