@@ -449,7 +449,7 @@ var MacroPlotLib = function() {
       detailBox.style("visibility","hidden");
       detailObj.isSet = false;
     }
-    if(date in macroData) {
+    else if(date in macroData) {
       detailBox.select("#text0")
         .text(date);
       detailBox.select("#text1")
