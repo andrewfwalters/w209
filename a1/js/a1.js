@@ -395,11 +395,8 @@ var MacroPlotLib = function() {
     var h = d3.select(this.parentNode);
     var thisRect = h.selectAll("rect");
     rect.attr("fill","white");
-    if(detailObj.isSet===true && detailObj.objKey===date) {
-      detailBox.style("visibility","hidden");
-      detailObj.isSet = false;
-    }
-    else if(date in macroData) {
+    //if(detailObj.isSet===true && detailObj.objKey===date) {
+    if(date in macroData) {
       detailBox.select("#text0")
         .text(date);
       detailBox.select("#text1")
@@ -414,6 +411,10 @@ var MacroPlotLib = function() {
       detailBox.style("visibility","visible");
       detailObj.objKey = date;
       detailObj.isSet = true;
+    }
+    else {
+      detailBox.style("visibility","hidden");
+      detailObj.isSet = false;
     }
   }//clickDateEvent
 
