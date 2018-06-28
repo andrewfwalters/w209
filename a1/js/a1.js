@@ -324,7 +324,7 @@ var MacroPlotLib = function() {
       .append(g)
       .attr("transform", function(d,i) {
         return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
-      };
+      });
 
     legendGroup1.append("rect")
       .attr("width", cellSize)
