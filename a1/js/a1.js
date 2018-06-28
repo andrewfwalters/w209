@@ -82,7 +82,7 @@ var MacroPlotLib = function() {
 
     var months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
     svg.append("g")
-        .attr("transform", "translate(" + 0 + "," + (-2) + ")")
+        .attr("transform", "translate(" + 0 + "," + (-3) + ")")
         .selectAll("text")
         .data(months)
         .enter()
