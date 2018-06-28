@@ -60,7 +60,7 @@ var MacroPlotLib = function() {
 
     //draw the year on top of each year's svg
     svg.append("text")
-        .attr("transform", "translate(" + (cellSize*26) + "," + (-cellSize) + ")")
+        .attr("transform", "translate(" + (cellSize*26) + "," + (-cellSize-2) + ")")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
         .attr("text-anchor", "middle")
@@ -82,7 +82,7 @@ var MacroPlotLib = function() {
 
     var months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
     svg.append("g")
-        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+        .attr("transform", "translate(" + 0 + "," + 2 + ")")
         .selectAll("text")
         .data(months)
         .enter()
