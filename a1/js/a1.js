@@ -312,11 +312,11 @@ var MacroPlotLib = function() {
       {"r":cellSize/4, "fill":hues[3], "text": "Calorie Goal"},
       {"r":cellSize/2-1, "fill":hues[3], "text": "+20% from Calorie Goal"}
     ];
-    var legendData2 = {
-      "low": {"r":cellSize/4, "fill":hues[0], "text": "High Percentage of Carbs"},
-      "med": {"r":cellSize/4, "fill":hues[1], "text": "High Percentage of Fats"},
-      "high": {"r":cellSize/4, "fill":hues[2], "text": "High Percentage of Proteins"},
-    };
+    var legendData2 = [
+      {"r":cellSize/4, "fill":hues[0], "text": "High Percentage of Carbs"},
+      {"r":cellSize/4, "fill":hues[1], "text": "High Percentage of Fats"},
+      {"r":cellSize/4, "fill":hues[2], "text": "High Percentage of Proteins"}
+    ];
 
     var drawLegendColumn = function(data,offset) {
       var legendGroup = bottomBox.append("g")
