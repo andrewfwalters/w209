@@ -325,15 +325,25 @@ var MacroPlotLib = function() {
       .append("g")
         .attr("class","calorieLegend")
         .attr("transform", function(d,i) {
-          console.log(i);
           return "translate(" + 0 + "," + ((0.5*cellSize)+(cellSize*i*1.5)) + ")";
         });
 
     legendGroup1.append("rect")
       .attr("width", cellSize)
       .attr("height", cellSize)
-      .attr("fill","black")
+      .attr("fill","white")
       .attr("stroke", "#ccc");
+
+    legendGroup1.append("circle")
+        .attr("r", function(){
+          return d3.select(this.parentNode).datum().r;
+        })
+        .attr("cx", cellSize/2)
+        .attr("cy", cellSize/2)
+        .attr("fill", function(){
+          return d3.select(this.parentNode).datum().fill;
+        })
+        .attr("stroke", "none");
 
       /*legendGroup1.append("text")
         .attr("width", cellSize)
