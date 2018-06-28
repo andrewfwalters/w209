@@ -318,7 +318,7 @@ var MacroPlotLib = function() {
       "high": {"r":cellSize/4, "fill":hues[2], "text": "High Percentage of Proteins"},
     };
 
-    legendGroup1 = bottomBox.selectAll("rect")
+    legendGroup1 = bottomBox.selectAll("g")
       .data(legendData1)
       .enter()
       .append("g")
