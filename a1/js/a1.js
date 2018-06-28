@@ -307,11 +307,11 @@ var MacroPlotLib = function() {
         .text("text box")
         .attr("transform", d => "translate(0," + (cellSize*d) + ")");
 
-    var legendData1 = {
+    var legendData1 = [
       "low": {"r":1, "fill":hues[3], "text": "-20% from Calorie Goal"},
       "med": {"r":cellSize/4, "fill":hues[3], "text": "Calorie Goal"},
       "high": {"r":cellSize/2-1, "fill":hues[3], "text": "+20% from Calorie Goal"},
-    };
+    ];
     var legendData2 = {
       "low": {"r":cellSize/4, "fill":hues[0], "text": "High Percentage of Carbs"},
       "med": {"r":cellSize/4, "fill":hues[1], "text": "High Percentage of Fats"},
