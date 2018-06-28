@@ -345,6 +345,16 @@ var MacroPlotLib = function() {
         })
         .attr("stroke", "none");
 
+    legendGroup1.append("text")
+        .attr("x", cellSize*1.5)
+        .attr("y", cellSize*0.5)
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .style("text-anchor", "left")
+        .text(function(){
+          return d3.select(this.parentNode).datum().text;
+        })
+
       /*legendGroup1.append("text")
         .attr("width", cellSize)
         .attr("height", cellSize)
