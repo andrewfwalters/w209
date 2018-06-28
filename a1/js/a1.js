@@ -331,9 +331,6 @@ var MacroPlotLib = function() {
     legendGroup1.append("rect")
       .attr("width", cellSize)
       .attr("height", cellSize)
-      .attr("transform", function(d,i) {
-        return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
-      })
       .attr("fill","black")
       .attr("stroke", "#ccc");
 
