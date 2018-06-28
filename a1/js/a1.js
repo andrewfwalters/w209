@@ -318,20 +318,30 @@ var MacroPlotLib = function() {
       "high": {"r":cellSize/4, "fill":hues[2], "text": "High Percentage of Proteins"},
     };
 
-    legendGroup1 = bottomBox.selectAll("g")
+    var legendGroup1 = bottomBox.append("g")
+      .selectAll("g")
       .data(legendData1)
       .enter()
       .append("g")
-      .attr("class","calorieLegend")
-      .attr("transform", function(d,i) {
-        return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
-      });
+        .attr("class","calorieLegend")
+        .attr("transform", function(d,i) {
+          return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
+        });
 
     legendGroup1.append("rect")
       .attr("width", cellSize)
       .attr("height", cellSize)
+      .attr("transform", function(d,i) {
+        return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
+      })
       .attr("fill","black")
       .attr("stroke", "#ccc");
+
+      /*legendGroup1.append("text")
+        .attr("width", cellSize)
+        .attr("height", cellSize)
+        .attr("fill","black")
+        .attr("stroke", "#ccc");*/
 /*
     rect = dateGroups.append("rect")
         .attr("width", cellSize)
