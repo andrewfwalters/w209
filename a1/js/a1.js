@@ -370,36 +370,6 @@ var MacroPlotLib = function() {
     drawLegendColumn(legendData1,0);
     drawLegendColumn(legendData2,cellSize*15);
 
-      /*legendGroup1.append("text")
-        .attr("width", cellSize)
-        .attr("height", cellSize)
-        .attr("fill","black")
-        .attr("stroke", "#ccc");*/
-/*
-    rect = dateGroups.append("rect")
-        .attr("width", cellSize)
-        .attr("height", cellSize)
-        .attr("x", rectX)
-        .attr("y", rectY)
-        .attr("fill","white")
-        .attr("cursor", "crosshair")
-        .datum(d3.timeFormat("%Y-%m-%d"))
-        .on("mousedown",clickDateEvent);
-
-    //draw a circle on top of each rect
-    var circX = dateX(cellSize/2);
-    var circY = dateY(cellSize/2);
-    circ = dateGroups.append("circle")
-        .attr("r", 1)
-        .attr("cx", circX)
-        .attr("cy", circY)
-        .attr("fill", "none")
-        .attr("stroke", "none")
-        .attr("cursor", "crosshair")
-        .datum(d3.timeFormat("%Y-%m-%d"))
-        .on("mousedown",clickDateEvent);
-*/
-
     //read in data and populate calendar
     readData(url);
   };
