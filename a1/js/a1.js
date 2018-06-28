@@ -318,42 +318,45 @@ var MacroPlotLib = function() {
       "high": {"r":cellSize/4, "fill":hues[2], "text": "High Percentage of Proteins"},
     };
 
-    var legendGroup1 = bottomBox.append("g")
-      .selectAll("g")
-      .data(legendData1)
-      .enter()
-      .append("g")
-        .attr("class","calorieLegend")
-        .attr("transform", function(d,i) {
-          return "translate(" + 0 + "," + ((0.5*cellSize)+(cellSize*i*1.5)) + ")";
-        });
+    var drawLegendColumn = function(data,offset) {
+      var legendGroup = bottomBox.append("g")
+        .selectAll("g")
+        .data(legendData1)
+        .enter()
+        .append("g")
+          .attr("class","Legend")
+          .attr("transform", function(d,i) {
+            return "translate(" + offset + "," + ((0.5*cellSize)+(cellSize*i*1.5)) + ")";
+          });
 
-    legendGroup1.append("rect")
-      .attr("width", cellSize)
-      .attr("height", cellSize)
-      .attr("fill","white")
-      .attr("stroke", "#ccc");
+      legendGroup.append("rect")
+        .attr("width", cellSize)
+        .attr("height", cellSize)
+        .attr("fill","white")
+        .attr("stroke", "#ccc");
 
-    legendGroup1.append("circle")
-        .attr("r", function(){
-          return d3.select(this.parentNode).datum().r;
-        })
-        .attr("cx", cellSize/2)
-        .attr("cy", cellSize/2)
-        .attr("fill", function(){
-          return d3.select(this.parentNode).datum().fill;
-        })
-        .attr("stroke", "none");
+      legendGroup.append("circle")
+          .attr("r", function(){
+            return d3.select(this.parentNode).datum().r;
+          })
+          .attr("cx", cellSize/2)
+          .attr("cy", cellSize/2)
+          .attr("fill", function(){
+            return d3.select(this.parentNode).datum().fill;
+          })
+          .attr("stroke", "none");
 
-    legendGroup1.append("text")
-        .attr("x", cellSize*1.5)
-        .attr("y", cellSize*0.7)
-        .attr("font-family", "sans-serif")
-        .attr("font-size", 10)
-        .style("text-anchor", "left")
-        .text(function(){
-          return d3.select(this.parentNode).datum().text;
-        })
+      legendGroup.append("text")
+          .attr("x", cellSize*1.5)
+          .attr("y", cellSize*0.7)
+          .attr("font-family", "sans-serif")
+          .attr("font-size", 10)
+          .style("text-anchor", "left")
+          .text(function(){
+            return d3.select(this.parentNode).datum().text;
+          });
+    };
+    drawLegendColumn(legendGroup1,0);
 
       /*legendGroup1.append("text")
         .attr("width", cellSize)
