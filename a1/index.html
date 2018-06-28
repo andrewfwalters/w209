@@ -19,7 +19,7 @@
   <p>
     A popular way to track daily nutrition is to record their macronutrients (carbohyrates, fats, and proteins).
     For many people, recording each macro is only slightly more work than counting calories but provides much more information.
-    The dataset used in this visualization is just a json array with for fields per entry: grams of carbs, fats, and protiens and the date.
+    The dataset used in this visualization is just a json array with four fields per entry: grams of carbs, fats, and protiens and the date.
   </p>
   <p>
     A typical user of this vizualization would be a person who has been tracking macros and needs an overview of their dietary progress.
@@ -27,6 +27,8 @@
     A user would likely be concerned with two main issues - their total calorie load and their macro ratios.
     The total calorie load is the amount of calories consumed in a day.
     The macro ratio is the fraction of the calorie load composed of each macronutrient, which is the most important dietary factor in body composition after calorie load.
+    The user should determine their unique dietary needs and set the goal sliders accordingly to get a proper vizualization.
+    The sliders default to a sensibe 200g/68g/150g (40%/30%/30% ratios) with a ~2000 calorie diet.
   </p>
   <p>
     The primary task for this visualization is to get an overview of the large quantity of information.
@@ -34,6 +36,8 @@
     A user could quickly identify broad trends, like an increase or decrease in calorie load over time.
     The closeness of the datapoints allows for a broader picture to stand out simply drawing the eye to concentrations or lack of color.
     The average days are less noticeable by comparison.
+    In order to compensate for the difficulting of comparing the area of circles, the scale for calorie load is kept narrow.
+    Only a range of +/- 20% from the goal can be shown, with more detailed information availible when the date is clicked.
   </p>
   <div id="goalContainer">
   </div>
@@ -41,6 +45,14 @@
   </div>
   <div id="legendContainer">
   </div>
+  <p>
+    The main takeaways from this vizualization for this user:
+    <ul>
+      <li>They have improved their calorie laod from high in Decemer to averge in 2018</li>
+      <li>They often each a high ratio of carbs</li>
+      <li>They have gotten better at recording their data in 2018</li>
+      <li>They may have over-dieted in early January</li>
+  </p>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="http://people.ischool.berkeley.edu/~andrewfwalters/a1/js/a1.js"></script>
   </body>

@@ -1,26 +1,26 @@
 [ {
     "date": "2018-05-31",
-    "carbs": 300,
-    "fat": 75,
+    "carbs": 210,
+    "fat": 80,
     "protein": 130
   },
   {
     "date": "2018-05-30",
-    "carbs": 270,
+    "carbs": 210,
     "fat": 67,
     "protein": 140
   },
   {
     "date": "2018-05-29",
-    "carbs": 206,
-    "fat": 80,
-    "protein": 146
+    "carbs": 180,
+    "fat": 65,
+    "protein": 170
   },
   {
     "date": "2018-05-28",
-    "carbs": 260,
+    "carbs": 200,
     "fat": 67,
-    "protein": 130
+    "protein": 150
   },
   {
     "date": "2018-05-27",
