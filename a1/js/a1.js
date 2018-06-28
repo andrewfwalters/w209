@@ -322,6 +322,7 @@ var MacroPlotLib = function() {
       .data(legendData1)
       .enter()
       .append("g")
+      .attr("class","calorieLegend")
       .attr("transform", function(d,i) {
         return "translate(" + 0 + "," + (0.5*cellSize)+(cellSize*i*1.5) + ")";
       });
