@@ -1,0 +1,33 @@
+SCRIPT_REAL('
+import numpy as np
+from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
+from geopy.distance import geodesic
+from geopy.distance import great_circle
+geolocator = Nominatim()
+#addr = str(_arg1) + " Philadelphia, PA " + str(_arg2)
+home = ()
+default = (1000.0,1000.0)
+# try geocoder 3 times
+for i in range(0,3):
+    try:
+        #location = geolocator.geocode(addr)
+        location = geolocator.geocode("905 N Randolph Street, Philadelphia, PA 19123")
+        home = (location.latitude,location.longitude)
+        break
+    except GeocoderTimedOut:
+        home = default
+        continue
+    except AttributeError:
+        home = default
+        continue
+
+dist = []
+for lat,long in zip(_arg3,_arg4):
+    if((lat,long) == default):
+        current = 20
+    else:
+        current = great_circle(home, (lat,long)).miles
+    dist.append(current)
+return dist
+', [Street Address], [Zip Code], ATTR([Latitude]), ATTR([Longitude]))
